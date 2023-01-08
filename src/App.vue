@@ -1,30 +1,70 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <nav></nav>
+  <router-view />
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style lang="css">
+* {
+  margin: 0;
+  padding: 0;
 }
 
-nav {
-  padding: 30px;
+a {
+  text-decoration: none;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+::selection {
+  background-color: var(--main-green);
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+:root {
+  --main-green: #42c56c;
+  --grass-green: #7ed957;
+  --dark-gray: #545454;
+  --faded-gray: #a9b6ad;
+  --black: black;
+  --yellow: #ffde59;
+  --white: white;
+  /*  */
+  --tile-bg-color: #32303d;
+  --main-bg-color: #1b1b1b;
+  --dark-blue-tile: #23212e;
+  --sidebar-bg-color: #23212e;
+  --font-family-base: "PT Sans", sans-serif;
+  --font-family-roboto: "Roboto Condensed", sans-serif;
+}
+
+.body-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main {
+  flex: 1;
+  background-color: var(--main-bg-color);
+}
+
+.body-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.slides {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.slides .slide-pic img {
+  width: 100%;
+}
+
+.table-rank,
+.top-scorers {
+  display: flex;
+  padding: 1rem 0 0 3rem;
 }
 </style>

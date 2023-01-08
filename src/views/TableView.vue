@@ -6,8 +6,9 @@
     <section class="body-container">
       <side-bar />
       <main>
-        <div class="top-scorers">
+        <div class="table-rank">
           <div class="body-container">
+            <table-component />
             <div class="slides">
               <div class="slide-pic">
                 <img src="../assets/Arsenal_FC.png" alt="Arsenal" />
@@ -19,19 +20,22 @@
     </section>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HomeComponent from "@/components/HomeComponent.vue";
 import NavBar from "@/components/NavBar.vue";
 import SideBar from "@/components/SideBar.vue";
-
+import TableComponent from "@/components/TableComponent.vue";
 export default {
-  name: "HomeView",
-  components: {
-    HomeComponent,
-    NavBar,
-    SideBar,
+  components: { NavBar, SideBar, TableComponent },
+  props: {},
+  data() {
+    return {};
   },
+  created() {},
+  methods: {},
+  mounted() {},
 };
 </script>
+<style scoped>
+</style>
+<style lang='scss' scoped>
+</style>

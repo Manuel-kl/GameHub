@@ -8,6 +8,10 @@
       <main>
         <div class="top-scorers">
           <div class="body-container">
+            <div class="date">
+              <input type="text" id="date-picker" />
+            </div>
+            <matches-component />
             <div class="slides">
               <div class="slide-pic">
                 <img src="../assets/Arsenal_FC.png" alt="Arsenal" />
@@ -19,19 +23,22 @@
     </section>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-import HomeComponent from "@/components/HomeComponent.vue";
+  <script>
+import MatchesComponent from "@/components/MatchesComponent.vue";
 import NavBar from "@/components/NavBar.vue";
 import SideBar from "@/components/SideBar.vue";
-
 export default {
-  name: "HomeView",
-  components: {
-    HomeComponent,
-    NavBar,
-    SideBar,
+  components: { NavBar, MatchesComponent, SideBar },
+  props: {},
+  data() {
+    return {};
   },
+  created() {},
+  methods: {},
+  mounted() {},
 };
 </script>
+  <style scoped>
+</style>
+  <style lang='scss' scoped>
+</style>
