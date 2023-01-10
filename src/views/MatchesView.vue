@@ -8,9 +8,6 @@
       <main>
         <div class="top-scorers">
           <div class="body-container">
-            <div class="date">
-              <input type="text" id="date-picker" />
-            </div>
             <matches-component />
             <div class="slides">
               <div class="slide-pic">

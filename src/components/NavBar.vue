@@ -19,9 +19,6 @@
         <li>
           <router-link to="/scorers" active-class="active">Scorers</router-link>
         </li>
-        <li>
-          <router-link to="/table" active-class="active">Table</router-link>
-        </li>
       </ul>
     </div>
   </nav>

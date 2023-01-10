@@ -6,7 +6,7 @@
         <th>Team</th>
         <th>Goals</th>
         <th>Penalts</th>
-        <th>Assist</th>
+        <th>Assists</th>
       </tr>
       <tr>
         <td>Manuel Langat</td>

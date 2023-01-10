@@ -1,5 +1,15 @@
 <template>
   <div class="matches-container">
+    <div class="matches-header">
+      <Datepicker
+        v-model="date"
+        :enable-time-picker="false"
+        class="datepicker"
+        :position="auto"
+        :value="currentDate"
+      />
+      <h3>{{ date }}</h3>
+    </div>
     <div class="matches">
       <div class="match">
         <div class="time">15:32</div>
@@ -60,20 +70,61 @@
     </div>
   </div>
 </template>
-  <script>
+<script>
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 export default {
-  components: {},
+  watch: {},
+  components: { Datepicker },
   props: {},
   data() {
-    return {};
+    return {
+      date: "",
+      currentDate: "",
+    };
   },
-  created() {},
-  methods: {},
-  mounted() {},
+  created() {
+    function formatDate(date) {
+      let year = date.getFullYear();
+      let month = date.toLocaleString("default", { month: "long" });
+      let day = date.toLocaleString("default", { day: "numeric" });
+      day += this.getDaySuffix(day);
+      this.currentDate = day + " " + month + "," + " " + year;
+      this.date = day + " " + month + "," + " " + year;
+    }
+  },
+
+  methods: {
+    getDaySuffix(day) {
+      let suffix = "th";
+      if (day === 1 || day === 21 || day === 31) {
+        suffix = "st";
+      } else if (day === 2 || day === 22) {
+        suffix = "nd";
+      } else if (day === 3 || day === 23) {
+        suffix = "nd";
+      }
+      return suffix;
+    },
+  },
+  mounted() {
+    let newDate = new Date();
+    let year = newDate.getFullYear();
+    let month = newDate.toLocaleString("default", { month: "long" });
+    let day = newDate.toLocaleString("default", { day: "numeric" });
+    day += this.getDaySuffix(day);
+    this.date = day + " " + month + "," + " " + year;
+  },
+  computed: {},
 };
 </script>
 
-  <style lang='css' scoped>
+<style lang='css' scoped>
+.dp__input_icon,
+.dp__clear_icon {
+  display: none;
+}
 .matches-container {
   display: flex;
   flex-direction: column;
@@ -81,14 +132,16 @@ export default {
   width: 45%;
   font-family: var(--font-family-roboto);
 }
-
-.matches-container .date {
+.datepicker {
+  width: 2rem;
+}
+.matches-container .matches-header {
   display: flex;
   flex-direction: row;
   background-color: var(--dark-blue-tile);
-  padding: 1rem 2rem;
+  padding: 1rem;
   font-family: var(--font-family-roboto);
-  gap: 2rem;
+  gap: 1rem;
   margin-bottom: 2px;
   align-items: center;
   border-radius: 5px;
