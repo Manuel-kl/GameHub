@@ -1,5 +1,6 @@
 <template>
   <div>
+    <li v-for="team in teams" :key="team.team_id">{{ team.name }}</li>
     <table>
       <tr>
         <th>Position</th>
@@ -25,246 +26,35 @@
         <td>+33</td>
         <td>51</td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>Liverpool</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
-      </tr>
-      <tr>
-        <td>12</td>
-        <td>Manchester City</td>
-        <td>16</td>
-        <td>16</td>
-        <td>2</td>
-        <td>0</td>
-        <td>47</td>
-        <td>10</td>
-        <td>+37</td>
-        <td>50</td>
-      </tr>
-      <tr>
-        <td>13</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>14</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>15</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>16</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>17</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>18</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>19</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <tr>
-        <td>20</td>
-        <td>Leicester City</td>
-        <td>14</td>
-        <td>14</td>
-        <td>3</td>
-        <td>2</td>
-        <td>44</td>
-        <td>22</td>
-        <td>+22</td>
-        <td>45</td>
-      </tr>
-      <!-- Add more rows for the other teams -->
     </table>
   </div>
 </template>
   <script>
+import axios from "axios";
 export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      teams: [],
+    };
   },
-  created() {},
+  created() {
+    axios
+      .get("http://api.football-data.org/v4/competitions/PL/standings", {
+        headers: {
+          "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+          "x-rapidapi-key": "	e9e00611e0ab46598a0b9747dcbd8dc7",
+        },
+      })
+      .then((response) => {
+        this.teams = response.data.api.teams;
+        console.log(teams);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {},
   mounted() {},
 };

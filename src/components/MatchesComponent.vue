@@ -8,7 +8,7 @@
         :position="auto"
         :value="currentDate"
       />
-      <h3>{{ date }}</h3>
+      <h3>{{ formattedDate }}</h3>
     </div>
     <div class="matches">
       <div class="match">
@@ -73,9 +73,10 @@
 <script>
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-
+import format from "vue-date-fns";
 export default {
   watch: {},
+
   components: { Datepicker },
   props: {},
   data() {
@@ -116,15 +117,15 @@ export default {
     day += this.getDaySuffix(day);
     this.date = day + " " + month + "," + " " + year;
   },
-  computed: {},
+  computed: {
+    formakdttedDate() {
+      return this.date ? format(this.date, "Do MMM YYY") : "";
+    },
+  },
 };
 </script>
 
 <style lang='css' scoped>
-.dp__input_icon,
-.dp__clear_icon {
-  display: none;
-}
 .matches-container {
   display: flex;
   flex-direction: column;
@@ -132,9 +133,7 @@ export default {
   width: 45%;
   font-family: var(--font-family-roboto);
 }
-.datepicker {
-  width: 2rem;
-}
+
 .matches-container .matches-header {
   display: flex;
   flex-direction: row;
