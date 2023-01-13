@@ -1,6 +1,5 @@
 <template>
   <div>
-    <li v-for="team in teams" :key="team.team_id">{{ team.name }}</li>
     <table>
       <tr>
         <th>Position</th>
@@ -14,17 +13,17 @@
         <th>GD</th>
         <th>PTS</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Arsenal</td>
-        <td>17</td>
-        <td>17</td>
-        <td>0</td>
-        <td>1</td>
-        <td>47</td>
-        <td>14</td>
-        <td>+33</td>
-        <td>51</td>
+      <tr v-for="standing in standings" :key="standing.team.id">
+        <td>{{ standing.position }}</td>
+        <td>{{ standing.team.name.replace(" FC", "") }}</td>
+        <td>{{ standing.playedGames }}</td>
+        <td>{{ standing.won }}</td>
+        <td>{{ standing.draw }}</td>
+        <td>{{ standing.lost }}</td>
+        <td>{{ standing.goalsFor }}</td>
+        <td>{{ standing.goalsAgainst }}</td>
+        <td>{{ standing.goalDifference }}</td>
+        <td>{{ standing.points }}</td>
       </tr>
     </table>
   </div>
@@ -36,18 +35,18 @@ export default {
   props: {},
   data() {
     return {
-      teams: [],
+      standings: [],
     };
   },
   created() {
     axios
-      .get("https://api.football-data.org/v2/competitions/2021", {
+      .get("https://api.football-data.org/v2/competitions/2021/standings", {
         headers: {
-          "X-Auth-Token": process.env.VUE_APP_API_KEY,
+          "X-Auth-Token": "e9e00611e0ab46598a0b9747dcbd8dc7",
         },
       })
       .then((response) => {
-        this.data = response.data;
+        this.standings = response.data.standings[0].table;
         console.log(response);
       })
       .catch((error) => {

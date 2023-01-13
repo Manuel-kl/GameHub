@@ -9,11 +9,7 @@
         <div class="table-rank">
           <div class="body-container">
             <table-component />
-            <div class="slides">
-              <div class="slide-pic">
-                <img src="../assets/Arsenal_FC.png" alt="Arsenal" />
-              </div>
-            </div>
+            <random-image />
           </div>
         </div>
       </main>
@@ -22,10 +18,11 @@
 </template>
 <script>
 import NavBar from "@/components/NavBar.vue";
+import RandomImage from "@/components/RandomImage.vue";
 import SideBar from "@/components/SideBar.vue";
 import TableComponent from "@/components/TableComponent.vue";
 export default {
-  components: { NavBar, SideBar, TableComponent },
+  components: { NavBar, SideBar, TableComponent, RandomImage },
   props: {},
   data() {
     return {};

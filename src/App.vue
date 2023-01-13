@@ -54,12 +54,22 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: column;
   margin: 0 auto;
+  transition: height 0.5s linear, width 0.5s linear;
 }
 
 .slides .slide-pic img {
   width: 100%;
+  padding: 2rem 0;
+  animation: blink 5s infinite;
+  max-height: 250px;
+  object-fit: cover;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .table-rank,
