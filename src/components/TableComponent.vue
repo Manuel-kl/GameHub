@@ -41,15 +41,14 @@ export default {
   },
   created() {
     axios
-      .get("http://api.football-data.org/v4/competitions/PL/standings", {
+      .get("https://api.football-data.org/v2/competitions/2021", {
         headers: {
-          "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-          "x-rapidapi-key": "	e9e00611e0ab46598a0b9747dcbd8dc7",
+          "X-Auth-Token": process.env.VUE_APP_API_KEY,
         },
       })
       .then((response) => {
-        this.teams = response.data.api.teams;
-        console.log(teams);
+        this.data = response.data;
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
