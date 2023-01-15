@@ -63,7 +63,7 @@ main {
   width: 100%;
   padding: 2rem 0;
   animation: blink 5s infinite;
-  max-height: 250px;
+  height: 250px;
   object-fit: cover;
 }
 @keyframes blink {
