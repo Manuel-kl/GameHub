@@ -42,7 +42,7 @@ export default {
     axios
       .get("https://api.football-data.org/v2/competitions/2021/standings", {
         headers: {
-          "X-Auth-Token": "e9e00611e0ab46598a0b9747dcbd8dc7",
+          "X-Auth-Token": process.env.VUE_APP_API_KEY,
         },
       })
       .then((response) => {
@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-  <style lang='css' scoped>
+<style lang='css' scoped>
 td:first-child,
 tr:first-child {
   width: fit-content;

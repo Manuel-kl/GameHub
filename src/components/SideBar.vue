@@ -77,6 +77,7 @@ aside .leagues .league {
   padding: 0.7rem 1.2rem;
   border-bottom: 1px groove var(--tile-bg-color);
   font-size: 0.71rem;
+  transition: all 0.6s ease-out;
   border-radius: 5px;
 }
 
@@ -87,6 +88,7 @@ aside .leagues .league:hover {
   border-left: 1px groove var(--grass-green);
   background-color: var(--tile-bg-color);
   margin-right: -0.5rem;
+  transition: all 0.5s ease-in-out;
 }
 
 aside .league h4 {

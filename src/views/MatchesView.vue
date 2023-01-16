@@ -7,14 +7,8 @@
       <side-bar />
       <main>
         <div class="top-scorers">
-          <div class="body-container">
-            <matches-component />
-            <div class="slides">
-              <div class="slide-pic">
-                <img src="../assets/Arsenal_FC.png" alt="Arsenal" />
-              </div>
-            </div>
-          </div>
+          <matches-component />
+          <random-image />
         </div>
       </main>
     </section>
@@ -23,9 +17,10 @@
   <script>
 import MatchesComponent from "@/components/MatchesComponent.vue";
 import NavBar from "@/components/NavBar.vue";
+import RandomImage from "@/components/RandomImage.vue";
 import SideBar from "@/components/SideBar.vue";
 export default {
-  components: { NavBar, MatchesComponent, SideBar },
+  components: { NavBar, MatchesComponent, SideBar, RandomImage },
   props: {},
   data() {
     return {};

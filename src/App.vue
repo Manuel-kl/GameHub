@@ -25,8 +25,10 @@ a {
   --black: black;
   --yellow: #ffde59;
   --white: white;
+  --red: red;
   /*  */
   --tile-bg-color: #32303d;
+  --tile-bg-color-active: #3e3c4b;
   --main-bg-color: #1b1b1b;
   --dark-blue-tile: #23212e;
   --sidebar-bg-color: #23212e;

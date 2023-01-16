@@ -6,15 +6,7 @@
     <section class="body-container">
       <side-bar />
       <main>
-        <div class="top-scorers">
-          <div class="body-container">
-            <div class="slides">
-              <div class="slide-pic">
-                <img src="../assets/Arsenal_FC.png" alt="Arsenal" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <random-image />
       </main>
     </section>
   </div>
@@ -24,6 +16,7 @@
 // @ is an alias to /src
 import HomeComponent from "@/components/HomeComponent.vue";
 import NavBar from "@/components/NavBar.vue";
+import RandomImage from "@/components/RandomImage.vue";
 import SideBar from "@/components/SideBar.vue";
 
 export default {
@@ -32,6 +25,7 @@ export default {
     HomeComponent,
     NavBar,
     SideBar,
+    RandomImage,
   },
 };
 </script>

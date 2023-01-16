@@ -1,79 +1,32 @@
 <template>
   <div class="matches-container">
-    <div class="matches-header">
-      <Datepicker
-        v-model="date"
-        :enable-time-picker="false"
-        class="datepicker"
-        :position="auto"
-        :value="currentDate"
-      />
-      <h3>{{ formattedDate }}</h3>
-    </div>
-    <div class="matches">
-      <div class="match">
-        <div class="time">15:32</div>
-        <div class="teams">
-          <div class="home-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Arsenal</h4>
-          </div>
-          <h5>VS</h5>
-          <div class="away-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Chelsea</h4>
-          </div>
-        </div>
-      </div>
-      <div class="match">
-        <div class="time">15:32</div>
-        <div class="teams">
-          <div class="home-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Arsenal</h4>
-          </div>
-          <h5>VS</h5>
-          <div class="away-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Chelsea</h4>
-          </div>
-        </div>
-      </div>
-      <div class="match">
-        <div class="time">15:32</div>
-        <div class="teams">
-          <div class="home-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Arsenal</h4>
-          </div>
-          <h5>VS</h5>
-          <div class="away-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Chelsea</h4>
-          </div>
-        </div>
-      </div>
-      <div class="match">
-        <div class="time">15:32</div>
-        <div class="teams">
-          <div class="home-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Arsenal</h4>
-          </div>
-          <h5>VS</h5>
-          <div class="away-team">
-            <img src="../assets/Arsenal_FC.png" alt="" />
-            <h4>Chelsea</h4>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Home Team</th>
+        <th>Away Team</th>
+      </tr>
+      <tr v-for="match in scheduledMatches" :key="match.id" class="matches">
+        <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
+        <td>
+          {{
+            new Date(match.utcDate).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })
+          }}
+        </td>
+        <td>{{ match.homeTeam.name.replace(" FC", "") }}</td>
+        <td>{{ match.awayTeam.name.replace(" FC", "") }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 <script>
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import format from "vue-date-fns";
+import axios from "axios";
 export default {
   watch: {},
 
@@ -81,103 +34,61 @@ export default {
   props: {},
   data() {
     return {
-      date: "",
-      currentDate: "",
+      matches: [],
     };
   },
-  created() {
-    function formatDate(date) {
-      let year = date.getFullYear();
-      let month = date.toLocaleString("default", { month: "long" });
-      let day = date.toLocaleString("default", { day: "numeric" });
-      day += this.getDaySuffix(day);
-      this.currentDate = day + " " + month + "," + " " + year;
-      this.date = day + " " + month + "," + " " + year;
-    }
-  },
+  created() {},
 
-  methods: {
-    getDaySuffix(day) {
-      let suffix = "th";
-      if (day === 1 || day === 21 || day === 31) {
-        suffix = "st";
-      } else if (day === 2 || day === 22) {
-        suffix = "nd";
-      } else if (day === 3 || day === 23) {
-        suffix = "nd";
-      }
-      return suffix;
-    },
-  },
+  methods: {},
   mounted() {
-    let newDate = new Date();
-    let year = newDate.getFullYear();
-    let month = newDate.toLocaleString("default", { month: "long" });
-    let day = newDate.toLocaleString("default", { day: "numeric" });
-    day += this.getDaySuffix(day);
-    this.date = day + " " + month + "," + " " + year;
+    axios
+      .get("https://api.football-data.org/v2/competitions/2021/matches", {
+        headers: {
+          "X-Auth-Token": process.env.VUE_APP_API_KEY,
+        },
+      })
+      .then((response) => {
+        this.matches = response.data.matches;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   computed: {
-    formakdttedDate() {
-      return this.date ? format(this.date, "Do MMM YYY") : "";
+    scheduledMatches() {
+      return this.matches.filter((match) => match.status === "SCHEDULED");
     },
   },
 };
 </script>
 
 <style lang='css' scoped>
-.matches-container {
-  display: flex;
-  flex-direction: column;
-  color: var(--white);
-  width: 45%;
-  font-family: var(--font-family-roboto);
+td:first-child,
+tr:first-child {
+  width: fit-content;
 }
 
-.matches-container .matches-header {
-  display: flex;
-  flex-direction: row;
+table {
+  background-color: var(--tile-bg-color);
+  border-radius: 5px;
+  border-collapse: collapse;
+  color: var(--white);
+}
+
+table th {
   background-color: var(--dark-blue-tile);
   padding: 1rem;
-  font-family: var(--font-family-roboto);
-  gap: 1rem;
-  margin-bottom: 2px;
-  align-items: center;
+  text-align: left;
   border-radius: 5px;
-  border-bottom: 1px solid var(--dark-gray);
+  font-family: var(--font-family-roboto);
+  border-bottom: 2px groove var(--grass-green);
 }
 
-.matches-container .matches {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-}
-
-.matches-container .match {
-  display: flex;
-  flex-direction: row;
-  background-color: var(--tile-bg-color);
-  gap: 1rem;
+table tr td {
+  min-width: 100px;
   padding: 1rem;
-}
-
-.matches-container .matches .match .teams {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex: 1;
   font-family: var(--font-family-base);
-}
-
-.matches-container .matches .teams img {
-  width: 15px;
-  padding-right: 0.5rem;
-}
-
-.matches-container .matches .home-team,
-.matches-container .matches .away-team {
-  display: flex;
-  flex-direction: row;
+  vertical-align: middle;
+  border-bottom: 1px groove var(--dark-blue-tile);
 }
 </style>

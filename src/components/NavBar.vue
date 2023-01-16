@@ -85,16 +85,27 @@ nav li a {
   font-size: 1.3rem;
   margin-right: 15px;
   border: 2px solid var(--tile-bg-color);
+  transition: all 0.5s ease-in-out;
 }
 
 nav li {
 }
 
-nav li a:hover,
-.active {
-  border-bottom: 1px groove var(--main-green);
+nav li a:hover {
+  border-bottom: 1px groove var(--yellow);
   border-radius: 22px;
-  box-shadow: 1px 1px 2px 1px var(--grass-green);
+  transition: all 0.5s ease-in-out;
   color: var(--grass-green);
+}
+.active,
+.active:hover {
+  border-bottom: none;
+  border-radius: 22px;
+  background-color: var(--tile-bg-color-active);
+  border: 1px solid var(--tile-bg-color-active);
+  transition: all 0.5s ease-in-out;
+  border-bottom: 1px groove var(--yellow);
+  color: var(--grass-green);
+  transition: all 0.5s ease-in-out;
 }
 </style>

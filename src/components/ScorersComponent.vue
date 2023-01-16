@@ -5,65 +5,40 @@
         <th>Name</th>
         <th>Team</th>
         <th>Goals</th>
-        <th>Penalts</th>
-        <th>Assists</th>
       </tr>
-      <tr>
-        <td>Manuel Langat</td>
-        <td>
-          Arsenal <img src="../assets/Arsenal_FC.png" alt="Arsenal badge" />
-        </td>
-        <td>24</td>
-        <td>4</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>Manuel Langat</td>
-        <td>
-          Arsenal <img src="../assets/Arsenal_FC.png" alt="Arsenal badge" />
-        </td>
-        <td>24</td>
-        <td>4</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>Manuel Langat</td>
-        <td>
-          Arsenal <img src="../assets/Arsenal_FC.png" alt="Arsenal badge" />
-        </td>
-        <td>24</td>
-        <td>4</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>Manuel Langat</td>
-        <td>
-          Arsenal <img src="../assets/Arsenal_FC.png" alt="Arsenal badge" />
-        </td>
-        <td>24</td>
-        <td>4</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>Manuel Langat</td>
-        <td>
-          Arsenal <img src="../assets/Arsenal_FC.png" alt="Arsenal badge" />
-        </td>
-        <td>24</td>
-        <td>4</td>
-        <td>4</td>
+      <tr v-for="scorer in topScorers" :key="scorer.id">
+        <td>{{ scorer.player.name }}</td>
+        <td>{{ scorer.team.name }}</td>
+        <td>{{ scorer.numberOfGoals }}</td>
       </tr>
     </table>
   </div>
 </template>
   <script>
+import axios from "axios";
 export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      topScorers: [],
+    };
   },
-  created() {},
+  created() {
+    axios
+      .get(
+        "https://api.football-data.org/v2/competitions/2021/scorers?limit=1000",
+        {
+          headers: { "X-Auth-Token": process.env.VUE_APP_API_KEY },
+        }
+      )
+      .then((response) => {
+        this.topScorers = response.data.scorers;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {},
   mounted() {},
 };
