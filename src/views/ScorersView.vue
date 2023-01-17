@@ -12,15 +12,25 @@
         </div>
       </main>
     </section>
+    <section class="footer">
+      <footer-component />
+    </section>
   </div>
 </template>
   <script>
+import FooterComponent from "@/components/FooterComponent.vue";
 import NavBar from "@/components/NavBar.vue";
 import RandomImage from "@/components/RandomImage.vue";
 import ScorersComponent from "@/components/ScorersComponent.vue";
 import SideBar from "@/components/SideBar.vue";
 export default {
-  components: { NavBar, SideBar, ScorersComponent, RandomImage },
+  components: {
+    NavBar,
+    SideBar,
+    ScorersComponent,
+    RandomImage,
+    FooterComponent,
+  },
   props: {},
   data() {
     return {};

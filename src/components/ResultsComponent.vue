@@ -1,46 +1,109 @@
 <template>
   <div class="matches-container">
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Home Team</th>
-        <th>Score</th>
-        <th>Away Team</th>
-      </tr>
-      <tr v-for="match in sortedGames" :key="match.id" class="matches">
-        <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
-        <td>
-          {{
-            new Date(match.utcDate).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })
-          }}
-        </td>
-        <td
-          v-bind:class="{
-            win: match.score.winner === 'HOME_TEAM',
-            loss: match.score.winner === 'AWAY_TEAM',
-          }"
+    <div class="table">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Home Team</th>
+          <th>Score</th>
+          <th>Away Team</th>
+        </tr>
+        <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
+          <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
+          <td>
+            {{
+              new Date(match.utcDate).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })
+            }}
+          </td>
+          <td
+            v-bind:class="{
+              win: match.score.winner === 'HOME_TEAM',
+              loss: match.score.winner === 'AWAY_TEAM',
+            }"
+          >
+            {{ match.homeTeam.name.replace(" FC", "") }}
+          </td>
+          <td v-bind:class="{ draw: match.score.winner === 'DRAW' }">
+            {{ match.score.fullTime.homeTeam }}
+            :
+            {{ match.score.fullTime.awayTeam }}
+          </td>
+          <td
+            v-bind:class="{
+              win: match.score.winner === 'AWAY_TEAM',
+              loss: match.score.winner === 'HOME_TEAM',
+            }"
+          >
+            {{ match.awayTeam.name.replace(" FC", "") }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination">
+      <button
+        v-on:click="currentPage = currentPage - 1"
+        :disabled="currentPage == 1"
+        class="navigation-buttons"
+      >
+        Previous
+      </button>
+      <div class="page-buttons">
+        <button
+          v-if="currentPage <= totalPages && currentPage != pageOne"
+          v-on:click="currentPage = pageOne"
         >
-          {{ match.homeTeam.name.replace(" FC", "") }}
-        </td>
-        <td v-bind:class="{ draw: match.score.winner === 'DRAW' }">
-          {{ match.score.fullTime.homeTeam }}
-          :
-          {{ match.score.fullTime.awayTeam }}
-        </td>
-        <td
-          v-bind:class="{
-            win: match.score.winner === 'AWAY_TEAM',
-            loss: match.score.winner === 'HOME_TEAM',
-          }"
+          {{ pageOne }}
+        </button>
+        <span v-if="currentPage != pageOne">...</span>
+        <button
+          v-if="currentPage > 2"
+          v-on:click="currentPage = currentPage - 2"
         >
-          {{ match.awayTeam.name.replace(" FC", "") }}
-        </td>
-      </tr>
-    </table>
+          {{ currentPage - 2 }}
+        </button>
+        <button
+          v-if="currentPage > 1"
+          v-on:click="currentPage = currentPage - 1"
+        >
+          {{ currentPage - 1 }}
+        </button>
+        <button v-on:click="currentPage = currentPage" class="current-page">
+          {{ currentPage }}
+        </button>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = currentPage + 1"
+        >
+          {{ currentPage + 1 }}
+        </button>
+        <button
+          v-if="currentPage < totalPages - 1"
+          v-on:click="currentPage = currentPage + 2"
+        >
+          {{ currentPage + 2 }}
+        </button>
+
+        <span v-if="currentPage != totalPages"> ... </span>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = totalPages"
+        >
+          {{ totalPages }}
+        </button>
+      </div>
+
+      <button
+        v-on:click="currentPage = currentPage + 1"
+        :disabled="currentPage == totalPages"
+        class="navigation-buttons"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -55,6 +118,8 @@ export default {
   data() {
     return {
       matches: [],
+      currentPage: 1,
+      pageOne: 1,
     };
   },
   created() {},
@@ -69,7 +134,6 @@ export default {
       })
       .then((response) => {
         this.matches = response.data.matches;
-        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -83,6 +147,15 @@ export default {
       return this.scheduledMatches.sort(
         (a, b) => new Date(b.utcDate) - new Date(a.utcDate)
       );
+    },
+
+    paginatedMatches() {
+      const start = (this.currentPage - 1) * 10;
+
+      return this.sortedGames.slice(start, start + 10);
+    },
+    totalPages() {
+      return Math.ceil(this.sortedGames.length / 10);
     },
   },
 };

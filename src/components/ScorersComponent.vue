@@ -1,17 +1,80 @@
 <template>
   <div>
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Team</th>
-        <th>Goals</th>
-      </tr>
-      <tr v-for="scorer in topScorers" :key="scorer.id">
-        <td>{{ scorer.player.name }}</td>
-        <td>{{ scorer.team.name }}</td>
-        <td>{{ scorer.numberOfGoals }}</td>
-      </tr>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Goals</th>
+        </tr>
+        <tr v-for="scorer in paginatedScorers" :key="scorer.id">
+          <td>{{ scorer.player.name }}</td>
+          <td>{{ scorer.team.name }}</td>
+          <td>{{ scorer.numberOfGoals }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination">
+      <button
+        v-on:click="currentPage = currentPage - 1"
+        :disabled="currentPage == 1"
+        class="navigation-buttons"
+      >
+        Previous
+      </button>
+      <div class="page-buttons">
+        <button
+          v-if="currentPage <= totalPages && currentPage != pageOne"
+          v-on:click="currentPage = pageOne"
+        >
+          {{ pageOne }}
+        </button>
+        <span v-if="currentPage != pageOne">...</span>
+        <button
+          v-if="currentPage > 2"
+          v-on:click="currentPage = currentPage - 2"
+        >
+          {{ currentPage - 2 }}
+        </button>
+        <button
+          v-if="currentPage > 1"
+          v-on:click="currentPage = currentPage - 1"
+        >
+          {{ currentPage - 1 }}
+        </button>
+        <button v-on:click="currentPage = currentPage" class="current-page">
+          {{ currentPage }}
+        </button>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = currentPage + 1"
+        >
+          {{ currentPage + 1 }}
+        </button>
+        <button
+          v-if="currentPage < totalPages - 1"
+          v-on:click="currentPage = currentPage + 2"
+        >
+          {{ currentPage + 2 }}
+        </button>
+
+        <span v-if="currentPage != totalPages"> ... </span>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = totalPages"
+        >
+          {{ totalPages }}
+        </button>
+      </div>
+
+      <button
+        v-on:click="currentPage = currentPage + 1"
+        :disabled="currentPage == totalPages"
+        class="navigation-buttons"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
   <script>
@@ -22,6 +85,8 @@ export default {
   data() {
     return {
       topScorers: [],
+      currentPage: 1,
+      pageOne: 1,
     };
   },
   created() {
@@ -41,6 +106,16 @@ export default {
   },
   methods: {},
   mounted() {},
+  computed: {
+    paginatedScorers() {
+      const start = (this.currentPage - 1) * 10;
+
+      return this.topScorers.slice(start, start + 10);
+    },
+    totalPages() {
+      return Math.ceil(this.topScorers.length / 10);
+    },
+  },
 };
 </script>
   <style scoped>

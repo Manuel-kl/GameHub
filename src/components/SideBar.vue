@@ -1,52 +1,97 @@
 <template>
-  <aside>
-    <div class="title">
-      <h2>Competitions</h2>
-    </div>
-    <div class="leagues">
-      <div class="league">
-        <h4>Premier League</h4>
+  <div class="sidebar">
+    <font-awesome-icon
+      icon="fa-solid fa-bars"
+      class="menu-icon"
+      v-on:click="toggleSidebar"
+    />
+    <aside v-bind:class="{ open: sidebarOpen }">
+      <div class="title">
+        <h2>Competitions</h2>
       </div>
-      <div class="league">
-        <h4>Bundesliga</h4>
+      <div class="leagues">
+        <div class="league">
+          <h4>Premier League</h4>
+        </div>
+        <div class="league">
+          <h4>Bundesliga</h4>
+        </div>
+        <div class="league">
+          <h4>Serie A</h4>
+        </div>
+        <div class="league">
+          <h4>Ligue 1</h4>
+        </div>
+        <div class="league">
+          <h4>English League Championship</h4>
+        </div>
+        <div class="league">
+          <h4>UEFA Champions League</h4>
+        </div>
       </div>
-      <div class="league">
-        <h4>Serie A</h4>
-      </div>
-      <div class="league">
-        <h4>Ligue 1</h4>
-      </div>
-      <div class="league">
-        <h4>English League Championship</h4>
-      </div>
-      <div class="league">
-        <h4>UEFA Champions League</h4>
-      </div>
-    </div>
-  </aside>
+    </aside>
+  </div>
 </template>
 <script>
 export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      sidebarOpen: true,
+    };
   },
   created() {},
-  methods: {},
+  methods: {
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
+    },
+  },
   mounted() {},
 };
 </script>
 
 <style lang='css' scoped>
-aside {
+.sidebar {
+  background-color: var(--main-bg-color);
+}
+aside.open {
   display: flex;
   flex-direction: column;
-  background-color: var(--faded-gray);
   padding: 1rem;
   background-color: var(--main-bg-color);
   gap: 2rem;
-  flex-basis: 15%;
+  transform: translateX(0);
+  transition: all 0.5s ease-out;
+  width: 230px;
+  position: relative;
+}
+
+.menu-icon {
+  position: absolute;
+  top: 105px;
+  font-size: 1.5rem;
+  color: var(--main-green);
+  z-index: 2;
+  left: 0px;
+  padding: 1rem;
+  border-radius: 50%;
+  transition: all 0.5s ease-out;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.menu-icon:hover {
+  background-color: var(--tile-bg-color);
+  padding: 1rem;
+  margin-left: 4px;
+  transition: all 0.5s ease-out;
+  border-radius: 50%;
+}
+
+aside {
+  transform: translateX(-100%);
+  transition: all 0.5s ease-out;
+  position: fixed;
 }
 
 aside .title {
@@ -79,6 +124,7 @@ aside .leagues .league {
   font-size: 0.71rem;
   transition: all 0.6s ease-out;
   border-radius: 5px;
+  max-width: 210px;
 }
 
 aside .leagues .league:active,

@@ -1,31 +1,94 @@
 <template>
   <div>
-    <table>
-      <tr>
-        <th>Position</th>
-        <th>Team</th>
-        <th>P</th>
-        <th>W</th>
-        <th>D</th>
-        <th>L</th>
-        <th>F</th>
-        <th>A</th>
-        <th>GD</th>
-        <th>PTS</th>
-      </tr>
-      <tr v-for="standing in standings" :key="standing.team.id">
-        <td>{{ standing.position }}</td>
-        <td>{{ standing.team.name.replace(" FC", "") }}</td>
-        <td>{{ standing.playedGames }}</td>
-        <td>{{ standing.won }}</td>
-        <td>{{ standing.draw }}</td>
-        <td>{{ standing.lost }}</td>
-        <td>{{ standing.goalsFor }}</td>
-        <td>{{ standing.goalsAgainst }}</td>
-        <td>{{ standing.goalDifference }}</td>
-        <td>{{ standing.points }}</td>
-      </tr>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>Position</th>
+          <th>Team</th>
+          <th>P</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>F</th>
+          <th>A</th>
+          <th>GD</th>
+          <th>PTS</th>
+        </tr>
+        <tr v-for="standing in paginatedStandings" :key="standing.team.id">
+          <td>{{ standing.position }}</td>
+          <td>{{ standing.team.name.replace(" FC", "") }}</td>
+          <td>{{ standing.playedGames }}</td>
+          <td>{{ standing.won }}</td>
+          <td>{{ standing.draw }}</td>
+          <td>{{ standing.lost }}</td>
+          <td>{{ standing.goalsFor }}</td>
+          <td>{{ standing.goalsAgainst }}</td>
+          <td>{{ standing.goalDifference }}</td>
+          <td>{{ standing.points }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination">
+      <button
+        v-on:click="currentPage = currentPage - 1"
+        :disabled="currentPage == 1"
+        class="navigation-buttons"
+      >
+        Previous
+      </button>
+      <div class="page-buttons">
+        <button
+          v-if="currentPage <= totalPages && currentPage != pageOne"
+          v-on:click="currentPage = pageOne"
+        >
+          {{ pageOne }}
+        </button>
+        <span v-if="currentPage != pageOne">...</span>
+        <button
+          v-if="currentPage > 2"
+          v-on:click="currentPage = currentPage - 2"
+        >
+          {{ currentPage - 2 }}
+        </button>
+        <button
+          v-if="currentPage > 1"
+          v-on:click="currentPage = currentPage - 1"
+        >
+          {{ currentPage - 1 }}
+        </button>
+        <button v-on:click="currentPage = currentPage" class="current-page">
+          {{ currentPage }}
+        </button>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = currentPage + 1"
+        >
+          {{ currentPage + 1 }}
+        </button>
+        <button
+          v-if="currentPage < totalPages - 1"
+          v-on:click="currentPage = currentPage + 2"
+        >
+          {{ currentPage + 2 }}
+        </button>
+
+        <span v-if="currentPage != totalPages"> ... </span>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = totalPages"
+        >
+          {{ totalPages }}
+        </button>
+      </div>
+
+      <button
+        v-on:click="currentPage = currentPage + 1"
+        :disabled="currentPage == totalPages"
+        class="navigation-buttons"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
   <script>
@@ -36,6 +99,8 @@ export default {
   data() {
     return {
       standings: [],
+      currentPage: 1,
+      pageOne: 1,
     };
   },
   created() {
@@ -55,6 +120,15 @@ export default {
   },
   methods: {},
   mounted() {},
+  computed: {
+    paginatedStandings() {
+      const start = (this.currentPage - 1) * 10;
+      return this.standings.slice(start, start + 10);
+    },
+    totalPages() {
+      return Math.ceil(this.standings.length / 10);
+    },
+  },
 };
 </script>
 

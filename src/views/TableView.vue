@@ -14,15 +14,19 @@
         </div>
       </main>
     </section>
+    <section class="footer">
+      <footer-component />
+    </section>
   </div>
 </template>
 <script>
+import FooterComponent from "@/components/FooterComponent.vue";
 import NavBar from "@/components/NavBar.vue";
 import RandomImage from "@/components/RandomImage.vue";
 import SideBar from "@/components/SideBar.vue";
 import TableComponent from "@/components/TableComponent.vue";
 export default {
-  components: { NavBar, SideBar, TableComponent, RandomImage },
+  components: { NavBar, SideBar, TableComponent, RandomImage, FooterComponent },
   props: {},
   data() {
     return {};

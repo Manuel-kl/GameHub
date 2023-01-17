@@ -38,45 +38,66 @@ a {
 
 .body-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  flex: 1;
 }
 
 main {
   flex: 1;
   background-color: var(--main-bg-color);
-}
-
-.body-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.slides {
-  flex-basis: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  transition: height 0.5s linear, width 0.5s linear;
-}
-
-.slides .slide-pic img {
-  width: 100%;
-  padding: 2rem 0;
-  animation: blink 5s infinite;
-  height: 250px;
-  object-fit: cover;
-}
-@keyframes blink {
-  50% {
-    opacity: 0.6;
-  }
+  transition: all 0.3s ease-out;
 }
 
 .table-rank,
 .top-scorers {
   display: flex;
   padding: 1rem 0 0 3rem;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+  justify-content: center;
+  font-family: var(--font-family-roboto);
+}
+.pagination button:hover {
+  border: 1px groove var(--grass-green);
+  transition: all 0.5s ease-in-out;
+}
+.pagination span {
+  color: var(--grass-green);
+  font-size: 1.5rem;
+  height: 1vh;
+  margin: 0.2rem;
+}
+.page-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-buttons button {
+  padding: 10px;
+  margin: 0 5px;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  width: 40px;
+  border: 1px solid var(--tile-bg-color);
+  background: var(--tile-bg-color);
+  color: var(--white);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.page-buttons button.current-page {
+  background: #4caf50;
+  color: #fff;
+}
+.navigation-buttons {
+  background-color: var(--tile-bg-color);
+  color: var(--white);
+  width: 75px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 </style>

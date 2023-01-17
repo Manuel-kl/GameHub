@@ -1,26 +1,89 @@
 <template>
   <div class="matches-container">
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Home Team</th>
-        <th>Away Team</th>
-      </tr>
-      <tr v-for="match in scheduledMatches" :key="match.id" class="matches">
-        <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
-        <td>
-          {{
-            new Date(match.utcDate).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })
-          }}
-        </td>
-        <td>{{ match.homeTeam.name.replace(" FC", "") }}</td>
-        <td>{{ match.awayTeam.name.replace(" FC", "") }}</td>
-      </tr>
-    </table>
+    <div class="table">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Home Team</th>
+          <th>Away Team</th>
+        </tr>
+        <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
+          <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
+          <td>
+            {{
+              new Date(match.utcDate).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })
+            }}
+          </td>
+          <td>{{ match.homeTeam.name.replace(" FC", "") }}</td>
+          <td>{{ match.awayTeam.name.replace(" FC", "") }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="pagination">
+      <button
+        v-on:click="currentPage = currentPage - 1"
+        :disabled="currentPage == 1"
+        class="navigation-buttons"
+      >
+        Previous
+      </button>
+      <div class="page-buttons">
+        <button
+          v-if="currentPage <= totalPages && currentPage != pageOne"
+          v-on:click="currentPage = pageOne"
+        >
+          {{ pageOne }}
+        </button>
+        <span v-if="currentPage != pageOne">...</span>
+        <button
+          v-if="currentPage > 2"
+          v-on:click="currentPage = currentPage - 2"
+        >
+          {{ currentPage - 2 }}
+        </button>
+        <button
+          v-if="currentPage > 1"
+          v-on:click="currentPage = currentPage - 1"
+        >
+          {{ currentPage - 1 }}
+        </button>
+        <button v-on:click="currentPage = currentPage" class="current-page">
+          {{ currentPage }}
+        </button>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = currentPage + 1"
+        >
+          {{ currentPage + 1 }}
+        </button>
+        <button
+          v-if="currentPage < totalPages - 1"
+          v-on:click="currentPage = currentPage + 2"
+        >
+          {{ currentPage + 2 }}
+        </button>
+
+        <span v-if="currentPage != totalPages"> ... </span>
+        <button
+          v-if="currentPage < totalPages"
+          v-on:click="currentPage = totalPages"
+        >
+          {{ totalPages }}
+        </button>
+      </div>
+
+      <button
+        v-on:click="currentPage = currentPage + 1"
+        :disabled="currentPage == totalPages"
+        class="navigation-buttons"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -35,6 +98,8 @@ export default {
   data() {
     return {
       matches: [],
+      currentPage: 1,
+      pageOne: 1,
     };
   },
   created() {},
@@ -57,6 +122,14 @@ export default {
   computed: {
     scheduledMatches() {
       return this.matches.filter((match) => match.status === "SCHEDULED");
+    },
+    paginatedMatches() {
+      const start = (this.currentPage - 1) * 10;
+
+      return this.scheduledMatches.slice(start, start + 10);
+    },
+    totalPages() {
+      return Math.ceil(this.scheduledMatches.length / 10);
     },
   },
 };
