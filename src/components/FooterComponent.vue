@@ -3,7 +3,7 @@
     <div class="greetings">
       <h3>Langat Emmanuel</h3>
 
-      <p>Have a great {{ dayOfWeek }}</p>
+      <h4>Have a great {{ dayOfWeek }}</h4>
     </div>
     <div class="contact-links">
       <a
@@ -71,11 +71,9 @@ export default {
   border-right: 2px groove var(--yellow);
   letter-spacing: 0.2px;
   word-spacing: 5px;
-  font-weight: 500;
 }
 .footer .greetings p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-family-roboto);
 }
 .footer .contact-links {
   padding: 1rem;

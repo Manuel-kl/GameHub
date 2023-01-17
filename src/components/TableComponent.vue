@@ -1,6 +1,9 @@
 <template>
   <div>
     <div>
+      <div v-if="loading" class="loader">
+        <img src="../assets/loading.gif" alt="" />
+      </div>
       <table>
         <tr>
           <th>Position</th>
@@ -101,6 +104,7 @@ export default {
       standings: [],
       currentPage: 1,
       pageOne: 1,
+      loading: true,
     };
   },
   created() {
@@ -111,8 +115,10 @@ export default {
         },
       })
       .then((response) => {
-        this.standings = response.data.standings[0].table;
-        console.log(response);
+        setTimeout(() => {
+          this.standings = response.data.standings[0].table;
+          this.loading = false;
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);

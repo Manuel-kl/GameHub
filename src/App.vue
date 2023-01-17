@@ -100,4 +100,12 @@ main {
   font-size: 1rem;
   border-radius: 5px;
 }
+.loader {
+  display: flex;
+  padding: 3rem;
+}
+.loader img {
+  width: 100px;
+  margin: auto;
+}
 </style>

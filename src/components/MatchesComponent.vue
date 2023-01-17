@@ -1,6 +1,9 @@
 <template>
-  <div class="matches-container">
-    <div class="table">
+  <div>
+    <div>
+      <div v-if="loading" class="loader">
+        <img src="../assets/loading-1.gif" alt="" />
+      </div>
       <table>
         <tr>
           <th>Date</th>
@@ -100,6 +103,7 @@ export default {
       matches: [],
       currentPage: 1,
       pageOne: 1,
+      loading: true,
     };
   },
   created() {},
@@ -113,7 +117,10 @@ export default {
         },
       })
       .then((response) => {
-        this.matches = response.data.matches;
+        setTimeout(() => {
+          this.matches = response.data.matches;
+          this.loading = false;
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
