@@ -105,7 +105,7 @@ export default {
         setTimeout(() => {
           this.topScorers = response.data.scorers;
           this.loading = false;
-        }, 1000);
+        }, 600);
       })
       .catch((error) => {
         console.log(error);
@@ -128,11 +128,6 @@ export default {
   <style scoped>
 </style>
   <style lang='css' scoped>
-.top-scorers {
-  display: flex;
-  padding: 1rem 0 0 3rem;
-}
-
 table {
   background-color: var(--tile-bg-color);
   border-radius: 5px;
@@ -160,10 +155,5 @@ table tr td {
   text-align: center;
   vertical-align: middle;
   border: 1px groove var(--faded-gray);
-}
-
-table img {
-  width: 12px;
-  margin-left: 23px;
 }
 </style>

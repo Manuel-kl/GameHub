@@ -47,19 +47,20 @@ nav {
 
 nav h1 {
   color: var(--white);
-  text-shadow: 1px -2px 1px var(--main-green);
   font-family: var(--font-family-roboto);
   line-height: 1.5rem;
   font-size: 2rem;
   background-color: var(--dark-blue-tile);
   width: fit-content;
+  letter-spacing: 1px;
   padding: 1rem;
+  margin-right: 1rem;
   border-radius: 7px;
   box-shadow: 1px 1px 0px var(--main-green);
 }
 
 nav h1 span {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-roboto);
   color: var(--yellow);
 }
 
@@ -107,5 +108,25 @@ nav li a:hover {
   border-bottom: 1px groove var(--yellow);
   color: var(--grass-green);
   transition: all 0.5s ease-in-out;
+}
+@media (max-width: 800px) {
+  nav h12,
+  nav ul li a {
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+    margin-right: 5px;
+  }
+}
+@media (max-width: 700px) {
+  nav ul li a {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.7rem;
+    margin-right: 1px;
+  }
+  nav h1 {
+    font-size: 1.3rem;
+    padding: 0.4rem;
+    text-shadow: none;
+  }
 }
 </style>

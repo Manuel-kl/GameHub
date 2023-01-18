@@ -35,6 +35,12 @@ a {
   --font-family-base: "PT Sans", sans-serif;
   --font-family-roboto: "Roboto Condensed", sans-serif;
 }
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--main-bg-color);
+}
 
 .body-container {
   display: flex;
@@ -46,10 +52,10 @@ main {
   flex: 1;
   background-color: var(--main-bg-color);
   transition: all 0.3s ease-out;
+  padding: 1rem 0;
 }
 
-.table-rank,
-.top-scorers {
+.table-rank {
   display: flex;
   padding: 1rem 0 0 3rem;
 }
@@ -74,6 +80,7 @@ main {
 .page-buttons {
   display: flex;
   justify-content: center;
+  z-index: 1;
   align-items: center;
 }
 .page-buttons button {
@@ -107,5 +114,64 @@ main {
 .loader img {
   width: 100px;
   margin: auto;
+}
+@media (max-width: 1275px) {
+  .random-left {
+    display: none !important;
+  }
+}
+@media (max-width: 1020px) {
+}
+
+@media (max-width: 921px) {
+  table tr td,
+  table th {
+    font-size: 0.9rem !important;
+    padding: 0.9rem !important;
+  }
+}
+@media (max-width: 800px) {
+  table tr td,
+  table th {
+    font-size: 0.9rem !important;
+    padding: 1rem 0.6rem !important;
+  }
+  .pagination {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  .page-buttons {
+    padding: 0;
+  }
+  .navigation-buttons {
+    padding: 0.6rem 1rem;
+    z-index: 1;
+    width: fit-content;
+    min-width: 100px;
+    cursor: pointer;
+    border: 1px solid var(--tile-bg-color);
+  }
+  .page-buttons button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}
+@media (max-width: 700px) {
+  table tr td,
+  table th {
+    padding: 1rem 0.5rem !important;
+  }
+  table tr :nth-child(1),
+  table tr :nth-child(2) {
+    padding: 1rem 0.2rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .sm {
+    display: none;
+  }
 }
 </style>

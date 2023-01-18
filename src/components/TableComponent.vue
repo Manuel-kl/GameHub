@@ -6,14 +6,14 @@
       </div>
       <table>
         <tr>
-          <th>Position</th>
+          <th>#</th>
           <th>Team</th>
           <th>P</th>
-          <th>W</th>
-          <th>D</th>
-          <th>L</th>
-          <th>F</th>
-          <th>A</th>
+          <th class="sm">W</th>
+          <th class="sm">D</th>
+          <th class="sm">L</th>
+          <th class="sm">F</th>
+          <th class="sm">A</th>
           <th>GD</th>
           <th>PTS</th>
         </tr>
@@ -21,11 +21,11 @@
           <td>{{ standing.position }}</td>
           <td>{{ standing.team.name.replace(" FC", "") }}</td>
           <td>{{ standing.playedGames }}</td>
-          <td>{{ standing.won }}</td>
-          <td>{{ standing.draw }}</td>
-          <td>{{ standing.lost }}</td>
-          <td>{{ standing.goalsFor }}</td>
-          <td>{{ standing.goalsAgainst }}</td>
+          <td class="sm">{{ standing.won }}</td>
+          <td class="sm">{{ standing.draw }}</td>
+          <td class="sm">{{ standing.lost }}</td>
+          <td class="sm">{{ standing.goalsFor }}</td>
+          <td class="sm">{{ standing.goalsAgainst }}</td>
           <td>{{ standing.goalDifference }}</td>
           <td>{{ standing.points }}</td>
         </tr>
@@ -118,7 +118,7 @@ export default {
         setTimeout(() => {
           this.standings = response.data.standings[0].table;
           this.loading = false;
-        }, 1000);
+        }, 500);
       })
       .catch((error) => {
         console.log(error);
@@ -157,6 +157,7 @@ table {
   border-radius: 5px;
   border-collapse: collapse;
   color: var(--white);
+  margin: auto;
 }
 
 table th {
@@ -170,15 +171,60 @@ table th {
 }
 
 table tr td {
-  padding: 1rem;
+  padding: 0.7rem;
   font-family: var(--font-family-base);
   text-align: center;
   vertical-align: middle;
   border: 1px groove var(--faded-gray);
+  font-size: 1rem;
 }
 
 table img {
   width: 12px;
   margin-left: 23px;
+}
+@media (max-width: 400px) {
+  .sm {
+    display: none;
+  }
+  table tr td,
+  table tr th {
+    padding: 1rem 0 !important;
+    font-size: 0.8rem !important;
+  }
+  table {
+    padding: 2px;
+  }
+  th:nth-child(2) {
+    width: 100px;
+  }
+}
+@media (max-width: 800px) {
+  table tr td,
+  table th {
+    font-size: 0.9rem !important;
+    padding: 1rem 0.6rem !important;
+  }
+  .pagination {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+  .page-buttons {
+    padding: 0;
+  }
+  .navigation-buttons {
+    padding: 0.6rem 0.7rem;
+    z-index: 1;
+    max-width: 50px !important;
+    cursor: pointer;
+    border: 1px solid var(--tile-bg-color);
+  }
+  .page-buttons button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
 }
 </style>

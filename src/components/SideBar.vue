@@ -1,10 +1,17 @@
 <template>
   <div class="sidebar">
-    <font-awesome-icon
-      icon="fa-solid fa-bars"
+    <div
       class="menu-icon"
       v-on:click="toggleSidebar"
-    />
+      v-bind:class="{ sidebarOpen: sidebarOpen }"
+    >
+      <font-awesome-icon v-if="!sidebarOpen" icon="fa-solid fa-bars" />
+      <font-awesome-icon
+        v-if="sidebarOpen"
+        v-bind:class="{ rotate }"
+        icon="fa-solid fa-x"
+      />
+    </div>
     <aside v-bind:class="{ open: sidebarOpen }">
       <div class="title">
         <h2>Competitions</h2>
@@ -38,7 +45,8 @@ export default {
   props: {},
   data() {
     return {
-      sidebarOpen: true,
+      sidebarOpen: false,
+      rotate: false,
     };
   },
   created() {},
@@ -46,20 +54,46 @@ export default {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     },
+    rotateIcon() {
+      setTimeout(() => {
+        this.rotate = true;
+      }, 1000);
+    },
   },
-  mounted() {},
+  mounted() {
+    this.rotateIcon();
+  },
 };
 </script>
 
 <style lang='css' scoped>
 .sidebar {
   background-color: var(--main-bg-color);
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(27, 27, 27, 0);
 }
+.rotate {
+  animation: rotate 5s linear infinite;
+  transition: all 0.5s ease-in-out;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
 aside.open {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: var(--main-bg-color);
+  background-color: rgba(27, 27, 27, 0);
   gap: 2rem;
   transform: translateX(0);
   transition: all 0.5s ease-out;
@@ -69,23 +103,38 @@ aside.open {
 
 .menu-icon {
   position: absolute;
-  top: 105px;
+  top: 15px;
   font-size: 1.5rem;
   color: var(--main-green);
   z-index: 2;
+  text-align: center;
   left: 0px;
-  padding: 1rem;
-  border-radius: 50%;
+  border-radius: 15px;
   transition: all 0.5s ease-out;
   margin-left: 5px;
+  padding: 1rem;
+  cursor: pointer;
+}
+.sidebarOpen {
+  border-radius: 15px;
+  position: absolute;
+  top: 15px;
+  font-size: 1.5rem;
+  color: var(--main-green);
+  z-index: 2;
+  text-align: center;
+  left: 240px;
+  transition: all 0.5s ease-out;
+  margin-left: 5px;
+  padding: 1rem;
   cursor: pointer;
 }
 .menu-icon:hover {
-  background-color: var(--tile-bg-color);
   padding: 1rem;
+  background-color: var(--sidebar-bg-color);
+  border-radius: 5px;
   margin-left: 4px;
   transition: all 0.5s ease-out;
-  border-radius: 50%;
 }
 
 aside {
@@ -143,5 +192,30 @@ aside .league h4 {
   color: var(--white);
   text-align: center;
   font-family: var(--font-family-base);
+}
+@media (max-width: 1275px) {
+  aside.open {
+    background-color: rgba(27, 27, 27, 0.7);
+  }
+  .sidebarOpen {
+    background-color: var(--sidebar-bg-color);
+    border-radius: 0;
+    border-bottom: 1px groove var(--yellow);
+    animation: blink 5s infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .menu-icon {
+    top: 17px;
+  }
+}
+@media (max-width: 900px) {
+  aside .league h4 {
+    font-size: 1rem;
+  }
 }
 </style>

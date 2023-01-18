@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <section class="navbar">
       <nav-bar />
     </section>
@@ -7,7 +7,8 @@
     <section class="body-container">
       <side-bar />
       <main>
-        <h2>Mneuefkl</h2>
+        <random-image class="random-left" />
+
         <random-image />
       </main>
     </section>

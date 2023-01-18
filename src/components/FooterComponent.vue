@@ -91,4 +91,9 @@ export default {
   border-radius: 50%;
   transition: all 0.4s ease-in-out;
 }
+@media (max-width: 1275px) {
+  .footer {
+    position: relative;
+  }
+}
 </style>

@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="app">
     <section class="navbar">
       <nav-bar />
     </section>
     <section class="body-container">
       <side-bar />
       <main>
-        <div class="top-scorers">
+        <div class="container">
+          <random-image class="random-left" />
           <matches-component />
           <random-image />
         </div>
@@ -42,5 +43,11 @@ export default {
 </script>
   <style scoped>
 </style>
-  <style lang='scss' scoped>
+  <style lang='css' scoped>
+.container {
+  display: flex;
+  padding: 1rem 0 0 3rem;
+  display: flex;
+  justify-content: center;
+}
 </style>

@@ -164,20 +164,33 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto;
-  transition: height 0.5s linear, width 0.5s linear;
+  margin: 0 1rem;
+  width: 285px;
 }
 
 .slides .slide-pic img {
   width: 100%;
-  padding: 2rem 0;
   animation: blink 5s infinite;
   object-fit: cover;
-  width: 200px;
+  height: auto;
+  min-height: 250px;
+  overflow-x: hidden;
+  max-height: 70vh;
 }
 @keyframes blink {
   50% {
     opacity: 0.6;
+  }
+}
+@media (max-width: 1020px) {
+  .slides {
+    position: absolute;
+    display: flex;
+    margin: auto;
+    height: 100%;
+    opacity: 0.2;
+  }
+  .slides .slide-pic img {
   }
 }
 </style>

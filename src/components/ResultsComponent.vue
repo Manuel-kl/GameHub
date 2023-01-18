@@ -140,7 +140,7 @@ export default {
         setTimeout(() => {
           this.matches = response.data.matches;
           this.loading = false;
-        }, 1000);
+        }, 500);
       })
       .catch((error) => {
         console.log(error);

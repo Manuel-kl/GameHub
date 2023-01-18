@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <section class="navbar">
       <nav-bar />
     </section>
@@ -7,6 +7,7 @@
       <side-bar />
       <main>
         <div class="top-scorers">
+          <random-image class="random-left" />
           <scorers-component />
           <random-image />
         </div>
@@ -40,7 +41,12 @@ export default {
   mounted() {},
 };
 </script>
-  <style scoped>
-</style>
-  <style lang='scss' scoped>
+
+  <style lang='css' scoped>
+.top-scorers {
+  display: flex;
+  padding: 1rem 0 0 3rem;
+  display: flex;
+  justify-content: center;
+}
 </style>

@@ -4,7 +4,7 @@
       <div v-if="loading" class="loader">
         <img src="../assets/loading-1.gif" alt="" />
       </div>
-      <table>
+      <table class="lg-table">
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -23,6 +23,37 @@
           </td>
           <td>{{ match.homeTeam.name.replace(" FC", "") }}</td>
           <td>{{ match.awayTeam.name.replace(" FC", "") }}</td>
+        </tr>
+      </table>
+      <table class="sm-table">
+        <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
+          <td class="date-container">
+            <tr class="row">
+              {{
+                new Date(match.utcDate).toLocaleDateString()
+              }}
+            </tr>
+            <tr class="row">
+              {{
+                new Date(match.utcDate).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              }}
+            </tr>
+          </td>
+          <td>
+            <tr class="row">
+              {{
+                match.homeTeam.name.replace(" FC", "")
+              }}
+            </tr>
+            <tr class="row">
+              {{
+                match.awayTeam.name.replace(" FC", "")
+              }}
+            </tr>
+          </td>
         </tr>
       </table>
     </div>
@@ -120,7 +151,7 @@ export default {
         setTimeout(() => {
           this.matches = response.data.matches;
           this.loading = false;
-        }, 1000);
+        }, 300);
       })
       .catch((error) => {
         console.log(error);
@@ -143,8 +174,8 @@ export default {
 </script>
 
 <style lang='css' scoped>
-td:first-child,
-tr:first-child {
+.lg-table td:first-child,
+.lg-table tr:first-child {
   width: fit-content;
 }
 
@@ -155,7 +186,7 @@ table {
   color: var(--white);
 }
 
-table th {
+.lg-table th {
   background-color: var(--dark-blue-tile);
   padding: 1rem;
   text-align: left;
@@ -164,11 +195,40 @@ table th {
   border-bottom: 2px groove var(--grass-green);
 }
 
-table tr td {
+.lg-table tr td {
   min-width: 100px;
   padding: 1rem;
   font-family: var(--font-family-base);
   vertical-align: middle;
   border-bottom: 1px groove var(--dark-blue-tile);
+}
+@media (min-width: 600px) {
+  .sm-table {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .lg-table {
+    display: none;
+  }
+  .sm-table {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-family: var(--font-family-roboto);
+  }
+  .row {
+    padding: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+  }
+  .date-container {
+    width: fit-content;
+  }
+
+  .sm-table .matches {
+    display: flex;
+    border-bottom: 1px solid var(--main-bg-color);
+  }
 }
 </style>
