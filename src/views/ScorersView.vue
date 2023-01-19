@@ -8,7 +8,7 @@
       <main>
         <div class="top-scorers">
           <random-image class="random-left" />
-          <scorers-component />
+          <scorers-component class="scorers" />
           <random-image />
         </div>
       </main>
@@ -48,5 +48,8 @@ export default {
   padding: 1rem 0 0 3rem;
   display: flex;
   justify-content: center;
+}
+.scorers {
+  margin: 1rem;
 }
 </style>

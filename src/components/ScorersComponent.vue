@@ -18,13 +18,6 @@
       </table>
     </div>
     <div class="pagination">
-      <button
-        v-on:click="currentPage = currentPage - 1"
-        :disabled="currentPage == 1"
-        class="navigation-buttons"
-      >
-        Previous
-      </button>
       <div class="page-buttons">
         <button
           v-if="currentPage <= totalPages && currentPage != pageOne"
@@ -32,8 +25,9 @@
         >
           {{ pageOne }}
         </button>
-        <span v-if="currentPage != pageOne">...</span>
+        <span v-if="currentPage != pageOne">--</span>
         <button
+          class="sm-d-none"
           v-if="currentPage > 2"
           v-on:click="currentPage = currentPage - 2"
         >
@@ -55,13 +49,14 @@
           {{ currentPage + 1 }}
         </button>
         <button
+          class="sm-d-none"
           v-if="currentPage < totalPages - 1"
           v-on:click="currentPage = currentPage + 2"
         >
           {{ currentPage + 2 }}
         </button>
 
-        <span v-if="currentPage != totalPages"> ... </span>
+        <span v-if="currentPage != totalPages"> -- </span>
         <button
           v-if="currentPage < totalPages"
           v-on:click="currentPage = totalPages"
@@ -69,14 +64,6 @@
           {{ totalPages }}
         </button>
       </div>
-
-      <button
-        v-on:click="currentPage = currentPage + 1"
-        :disabled="currentPage == totalPages"
-        class="navigation-buttons"
-      >
-        Next
-      </button>
     </div>
   </div>
 </template>

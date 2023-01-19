@@ -19,13 +19,22 @@
         href="https://www.instagram.com/manuel_k_l_/"
         target="_blank"
         id="my-button"
-        ><font-awesome-icon icon="fa-brands fa-instagram" class="fa-icon sm-no"
+        class="sm-no"
+        ><font-awesome-icon icon="fa-brands fa-instagram" class="fa-icon"
       /></a>
-      <a href="https://github.com/Manuel-kl" target="_blank" id="my-button"
-        ><font-awesome-icon icon="fa-brands fa-github" class="fa-icon sm-no"
+      <a
+        href="https://github.com/Manuel-kl"
+        target="_blank"
+        id="my-button"
+        class="sm-no"
+        ><font-awesome-icon icon="fa-brands fa-github" class="fa-icon"
       /></a>
-      <a href="https://linkedin.com/in/elangat" target="_blank" id="my-button"
-        ><font-awesome-icon icon="fa-brands fa-linkedin" class="fa-icon sm-no"
+      <a
+        href="https://linkedin.com/in/elangat"
+        target="_blank"
+        id="my-button"
+        class="sm-no"
+        ><font-awesome-icon icon="fa-brands fa-linkedin" class="fa-icon"
       /></a>
       <a href="mailto:mannuehkipkirui@gmail.com" target="_blank" id="my-button"
         ><font-awesome-icon icon="fa-regular fa-envelope" class="fa-icon"
@@ -49,6 +58,9 @@ export default {
 </script>
 
   <style lang='css' scoped>
+.svg-inline--fa {
+  width: 1em;
+}
 .footer {
   background-color: var(--main-bg-color);
   display: flex;
@@ -72,20 +84,21 @@ export default {
   letter-spacing: 0.2px;
   word-spacing: 5px;
 }
-.footer .greetings p {
+.footer .greetings h4 {
   font-family: var(--font-family-roboto);
+  font-style: italic;
 }
 .footer .contact-links {
   padding: 1rem;
 }
-.footer .contact-links a {
+.footer .contact-links #my-button {
   color: var(--white);
-  padding: 1rem 1.2rem;
+  padding: 0.9rem;
   margin-right: 0.5rem;
   font-size: 1.5rem;
   border: 1px solid var(--main-bg-color);
 }
-.footer .contact-links a:hover {
+.footer .contact-links #my-button:hover {
   color: var(--grass-green);
   background: var(--tile-bg-color);
   border-radius: 50%;
@@ -94,6 +107,23 @@ export default {
 @media (max-width: 1275px) {
   .footer {
     position: relative;
+  }
+}
+@media (max-width: 600px) {
+  .sm-no {
+    display: none;
+  }
+  .footer .greetings {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  .footer .greetings h3 {
+    border-right: none;
+    padding: 0;
+    font-size: 1.4rem;
+    margin: 0;
   }
 }
 </style>

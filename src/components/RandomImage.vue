@@ -172,10 +172,11 @@ export default {
   width: 100%;
   animation: blink 5s infinite;
   object-fit: cover;
-  height: auto;
+  z-index: 1;
+  height: 70vh;
   min-height: 250px;
   overflow-x: hidden;
-  max-height: 70vh;
+  max-height: 50vh;
 }
 @keyframes blink {
   50% {
@@ -184,11 +185,11 @@ export default {
 }
 @media (max-width: 1020px) {
   .slides {
-    position: absolute;
+    position: fixed;
+    height: 70vh;
     display: flex;
     margin: auto;
-    height: 100%;
-    opacity: 0.2;
+    opacity: 0.3;
   }
   .slides .slide-pic img {
   }

@@ -5,7 +5,11 @@
       v-on:click="toggleSidebar"
       v-bind:class="{ sidebarOpen: sidebarOpen }"
     >
-      <font-awesome-icon v-if="!sidebarOpen" icon="fa-solid fa-bars" />
+      <font-awesome-icon
+        v-if="!sidebarOpen"
+        icon="fa-solid fa-bars"
+        class="side-bar-open"
+      />
       <font-awesome-icon
         v-if="sidebarOpen"
         v-bind:class="{ rotate }"
@@ -70,9 +74,10 @@ export default {
 .sidebar {
   background-color: var(--main-bg-color);
   position: absolute;
-  z-index: 1;
+  z-index: 10;
   background-color: rgba(27, 27, 27, 0);
 }
+
 .rotate {
   animation: rotate 5s linear infinite;
   transition: all 0.5s ease-in-out;
@@ -103,7 +108,7 @@ aside.open {
 
 .menu-icon {
   position: absolute;
-  top: 15px;
+  top: -5px;
   font-size: 1.5rem;
   color: var(--main-green);
   z-index: 2;
@@ -174,6 +179,7 @@ aside .leagues .league {
   transition: all 0.6s ease-out;
   border-radius: 5px;
   max-width: 210px;
+  z-index: 223;
 }
 
 aside .leagues .league:active,
@@ -208,14 +214,14 @@ aside .league h4 {
       opacity: 0.7;
     }
   }
-
-  .menu-icon {
-    top: 17px;
-  }
 }
 @media (max-width: 900px) {
   aside .league h4 {
     font-size: 1rem;
+  }
+  aside .leagues .league {
+    text-align: center;
+    padding: 0.7rem 1rem;
   }
 }
 </style>

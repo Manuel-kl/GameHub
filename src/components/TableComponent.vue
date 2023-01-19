@@ -19,7 +19,17 @@
         </tr>
         <tr v-for="standing in paginatedStandings" :key="standing.team.id">
           <td>{{ standing.position }}</td>
-          <td>{{ standing.team.name.replace(" FC", "") }}</td>
+          <td>
+            <div class="team-row">
+              <img
+                :src="crestUrl + standing.team.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+
+              {{ standing.team.name.replace(" FC", "") }}
+            </div>
+          </td>
           <td>{{ standing.playedGames }}</td>
           <td class="sm">{{ standing.won }}</td>
           <td class="sm">{{ standing.draw }}</td>
@@ -32,22 +42,17 @@
       </table>
     </div>
     <div class="pagination">
-      <button
-        v-on:click="currentPage = currentPage - 1"
-        :disabled="currentPage == 1"
-        class="navigation-buttons"
-      >
-        Previous
-      </button>
       <div class="page-buttons">
         <button
+          class="first-page"
           v-if="currentPage <= totalPages && currentPage != pageOne"
           v-on:click="currentPage = pageOne"
         >
           {{ pageOne }}
         </button>
-        <span v-if="currentPage != pageOne">...</span>
+        <span v-if="currentPage != pageOne">--</span>
         <button
+          class="sm-d-none"
           v-if="currentPage > 2"
           v-on:click="currentPage = currentPage - 2"
         >
@@ -69,28 +74,22 @@
           {{ currentPage + 1 }}
         </button>
         <button
+          class="sm-d-none"
           v-if="currentPage < totalPages - 1"
           v-on:click="currentPage = currentPage + 2"
         >
           {{ currentPage + 2 }}
         </button>
 
-        <span v-if="currentPage != totalPages"> ... </span>
+        <span v-if="currentPage != totalPages">--</span>
         <button
+          class="last-page"
           v-if="currentPage < totalPages"
           v-on:click="currentPage = totalPages"
         >
           {{ totalPages }}
         </button>
       </div>
-
-      <button
-        v-on:click="currentPage = currentPage + 1"
-        :disabled="currentPage == totalPages"
-        class="navigation-buttons"
-      >
-        Next
-      </button>
     </div>
   </div>
 </template>
@@ -105,6 +104,9 @@ export default {
       currentPage: 1,
       pageOne: 1,
       loading: true,
+      crestUrl: "https://crests.football-data.org/",
+      crestUrlExt: ".png",
+      altCrestUrlExt: ".svg",
     };
   },
   created() {
@@ -124,7 +126,11 @@ export default {
         console.log(error);
       });
   },
-  methods: {},
+  methods: {
+    onError() {
+      this.crestUrlExt = this.altCrestUrlExt;
+    },
+  },
   mounted() {},
   computed: {
     paginatedStandings() {
@@ -159,7 +165,11 @@ table {
   color: var(--white);
   margin: auto;
 }
-
+.team-row img {
+  padding-right: 0.5rem;
+  vertical-align: middle;
+  width: 20px;
+}
 table th {
   background-color: var(--dark-blue-tile);
   padding: 1rem;
@@ -177,11 +187,17 @@ table tr td {
   vertical-align: middle;
   border: 1px groove var(--faded-gray);
   font-size: 1rem;
+  font-size: 0.9rem;
+}
+table tr td:nth-child(2) {
+  text-align: left;
 }
 
-table img {
-  width: 12px;
-  margin-left: 23px;
+.navigation-buttons,
+.first-page,
+.last-page,
+.pagination span {
+  display: none;
 }
 @media (max-width: 400px) {
   .sm {
@@ -203,28 +219,29 @@ table img {
   table tr td,
   table th {
     font-size: 0.9rem !important;
-    padding: 1rem 0.6rem !important;
+    padding: 0 0.3rem !important;
   }
-  .pagination {
-    padding: 2rem 0;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
+  table tr td:not(:nth-child(2)),
+  table th:not(:nth-child(2)) {
+    padding: 0.9rem !important;
   }
-  .page-buttons {
-    padding: 0;
+  table {
+    margin: 0 1rem;
   }
-  .navigation-buttons {
-    padding: 0.6rem 0.7rem;
-    z-index: 1;
-    max-width: 50px !important;
-    cursor: pointer;
-    border: 1px solid var(--tile-bg-color);
+}
+@media (max-width: 600px) {
+  .sm {
+    display: none;
   }
-  .page-buttons button {
-    font-size: 0.9rem;
-    padding: 0.5rem;
+}
+@media (max-width: 400px) {
+  table tr td,
+  table th {
+    font-size: 0.9rem !important;
+  }
+  table tr td:not(:nth-child(2)),
+  table th:not(:nth-child(2)) {
+    padding: 0.8rem !important;
   }
 }
 </style>

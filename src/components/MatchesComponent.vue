@@ -12,8 +12,10 @@
           <th>Away Team</th>
         </tr>
         <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
-          <td>{{ new Date(match.utcDate).toLocaleDateString() }}</td>
-          <td>
+          <td class="datetime">
+            {{ new Date(match.utcDate).toLocaleDateString() }}
+          </td>
+          <td class="datetime">
             {{
               new Date(match.utcDate).toLocaleTimeString([], {
                 hour: "2-digit",
@@ -21,19 +23,38 @@
               })
             }}
           </td>
-          <td>{{ match.homeTeam.name.replace(" FC", "") }}</td>
-          <td>{{ match.awayTeam.name.replace(" FC", "") }}</td>
+          <td>
+            <div class="team-row">
+              <img
+                :src="crestUrl + match.homeTeam.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+
+              {{ match.homeTeam.name.replace(" FC", "") }}
+            </div>
+          </td>
+          <td>
+            <div class="team-row">
+              <img
+                :src="crestUrl + match.awayTeam.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+              {{ match.awayTeam.name.replace(" FC", "") }}
+            </div>
+          </td>
         </tr>
       </table>
       <table class="sm-table">
         <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
           <td class="date-container">
-            <tr class="row">
+            <tr class="row date">
               {{
                 new Date(match.utcDate).toLocaleDateString()
               }}
             </tr>
-            <tr class="row">
+            <tr class="row time">
               {{
                 new Date(match.utcDate).toLocaleTimeString([], {
                   hour: "2-digit",
@@ -43,28 +64,32 @@
             </tr>
           </td>
           <td>
-            <tr class="row">
-              {{
-                match.homeTeam.name.replace(" FC", "")
-              }}
+            <tr class="row home">
+              <div class="team-row">
+                <img
+                  :src="crestUrl + match.homeTeam.id + crestUrlExt"
+                  @error="onError"
+                  alt=""
+                />
+
+                {{ match.homeTeam.name.replace(" FC", "") }}
+              </div>
             </tr>
-            <tr class="row">
-              {{
-                match.awayTeam.name.replace(" FC", "")
-              }}
+            <tr class="row away">
+              <div class="team-row">
+                <img
+                  :src="crestUrl + match.awayTeam.id + crestUrlExt"
+                  @error="onError"
+                  alt=""
+                />
+                {{ match.awayTeam.name.replace(" FC", "") }}
+              </div>
             </tr>
           </td>
         </tr>
       </table>
     </div>
     <div class="pagination">
-      <button
-        v-on:click="currentPage = currentPage - 1"
-        :disabled="currentPage == 1"
-        class="navigation-buttons"
-      >
-        Previous
-      </button>
       <div class="page-buttons">
         <button
           v-if="currentPage <= totalPages && currentPage != pageOne"
@@ -72,8 +97,9 @@
         >
           {{ pageOne }}
         </button>
-        <span v-if="currentPage != pageOne">...</span>
+        <span v-if="currentPage != pageOne">--</span>
         <button
+          class="sm-d-none"
           v-if="currentPage > 2"
           v-on:click="currentPage = currentPage - 2"
         >
@@ -95,13 +121,14 @@
           {{ currentPage + 1 }}
         </button>
         <button
+          class="sm-d-none"
           v-if="currentPage < totalPages - 1"
           v-on:click="currentPage = currentPage + 2"
         >
           {{ currentPage + 2 }}
         </button>
 
-        <span v-if="currentPage != totalPages"> ... </span>
+        <span v-if="currentPage != totalPages"> -- </span>
         <button
           v-if="currentPage < totalPages"
           v-on:click="currentPage = totalPages"
@@ -109,14 +136,6 @@
           {{ totalPages }}
         </button>
       </div>
-
-      <button
-        v-on:click="currentPage = currentPage + 1"
-        :disabled="currentPage == totalPages"
-        class="navigation-buttons"
-      >
-        Next
-      </button>
     </div>
   </div>
 </template>
@@ -135,11 +154,18 @@ export default {
       currentPage: 1,
       pageOne: 1,
       loading: true,
+      crestUrl: "https://crests.football-data.org/",
+      crestUrlExt: ".png",
+      altCrestUrlExt: ".svg",
     };
   },
   created() {},
 
-  methods: {},
+  methods: {
+    onError() {
+      this.crestUrlExt = this.altCrestUrlExt;
+    },
+  },
   mounted() {
     axios
       .get("https://api.football-data.org/v2/competitions/2021/matches", {
@@ -202,33 +228,58 @@ table {
   vertical-align: middle;
   border-bottom: 1px groove var(--dark-blue-tile);
 }
-@media (min-width: 600px) {
+@media (max-width: 700px) {
+}
+@media (min-width: 700px) {
   .sm-table {
     display: none;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .lg-table {
     display: none;
   }
   .sm-table {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1rem 0;
     font-family: var(--font-family-roboto);
   }
   .row {
-    padding: 0.5rem;
-    font-size: 1rem;
+    padding: 0.5rem !important;
     display: flex;
   }
   .date-container {
     width: fit-content;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .date-container .date,
+  .date-container .time {
+    justify-content: center;
+    padding: 0.2rem !important;
   }
 
+  .sm-table .matches .away,
+  .sm-table .matches .home {
+    font-size: 1rem;
+  }
   .sm-table .matches {
     display: flex;
     border-bottom: 1px solid var(--main-bg-color);
+  }
+}
+@media (max-width: 430px) {
+  table {
+    padding: 0 !important;
+  }
+  .sm-table .matches .away,
+  .sm-table .matches .home {
+    font-size: 0.9rem;
+  }
+  .date-container {
+    padding: 0;
   }
 }
 </style>

@@ -8,7 +8,7 @@
       <main>
         <div class="container">
           <random-image class="random-left" />
-          <matches-component />
+          <matches-component class="matches" />
           <random-image />
         </div>
       </main>
@@ -46,8 +46,16 @@ export default {
   <style lang='css' scoped>
 .container {
   display: flex;
-  padding: 1rem 0 0 3rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
+}
+.matches {
+  margin: 1rem;
+}
+@media (max-width: 700px) {
+  .matches {
+    flex: 1;
+  }
 }
 </style>

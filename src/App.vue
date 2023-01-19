@@ -59,6 +59,24 @@ main {
   display: flex;
   padding: 1rem 0 0 3rem;
 }
+th,
+tr,
+td {
+  z-index: 2;
+}
+table {
+  z-index: 3;
+}
+.team-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.team-row img {
+  padding-right: 1rem;
+  vertical-align: middle;
+  width: 20px;
+}
 
 .pagination {
   display: flex;
@@ -66,6 +84,8 @@ main {
   padding: 2rem;
   justify-content: center;
   font-family: var(--font-family-roboto);
+  z-index: 5;
+  position: relative;
 }
 .pagination button:hover {
   border: 1px groove var(--grass-green);
@@ -73,9 +93,9 @@ main {
 }
 .pagination span {
   color: var(--grass-green);
-  font-size: 1.5rem;
-  height: 1vh;
+  font-size: 1rem;
   margin: 0.2rem;
+  width: 0.7rem;
 }
 .page-buttons {
   display: flex;
@@ -138,10 +158,9 @@ main {
   }
   .pagination {
     padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+  }
+  .sm-d-none {
+    display: none;
   }
   .page-buttons {
     padding: 0;
@@ -160,18 +179,7 @@ main {
   }
 }
 @media (max-width: 700px) {
-  table tr td,
-  table th {
-    padding: 1rem 0.5rem !important;
-  }
-  table tr :nth-child(1),
-  table tr :nth-child(2) {
-    padding: 1rem 0.2rem !important;
-  }
 }
 @media (max-width: 600px) {
-  .sm {
-    display: none;
-  }
 }
 </style>
