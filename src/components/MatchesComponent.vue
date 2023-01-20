@@ -228,8 +228,7 @@ table {
   vertical-align: middle;
   border-bottom: 1px groove var(--dark-blue-tile);
 }
-@media (max-width: 700px) {
-}
+
 @media (min-width: 700px) {
   .sm-table {
     display: none;
@@ -280,6 +279,9 @@ table {
   }
   .date-container {
     padding: 0;
+  }
+  .sm-table tr td {
+    padding: 0.7rem 0 0 0.7rem !important;
   }
 }
 </style>

@@ -53,4 +53,14 @@ export default {
 .results {
   margin: 1rem;
 }
+@media (max-width: 700px) {
+  .results {
+    flex: 1;
+  }
+}
+@media (max-width: 500px) {
+  .container {
+    padding: 1rem 0 !important;
+  }
+}
 </style>

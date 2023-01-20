@@ -45,11 +45,16 @@ export default {
   <style lang='css' scoped>
 .top-scorers {
   display: flex;
-  padding: 1rem 0 0 3rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
 }
 .scorers {
   margin: 1rem;
+}
+@media (max-width: 500px) {
+  .top-scorers {
+    padding: 1rem 0 !important;
+  }
 }
 </style>

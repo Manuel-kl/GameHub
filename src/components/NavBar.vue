@@ -21,18 +21,30 @@
         </li>
       </ul>
     </div>
+    <div class="sm-nav">
+      <select v-model="selectedRoute" @change="changeRoute">
+        <option value="/table">Table</option>
+        <option value="/matches">Matches</option>
+        <option value="/results">Results</option>
+        <option value="/scorers">Scorers</option>
+      </select>
+    </div>
   </nav>
 </template>
 <script>
 export default {
-  components: {},
-  props: {},
+  watch: {},
   data() {
-    return {};
+    return {
+      selectedRoute: "matches",
+    };
+  },
+  methods: {
+    changeRoute() {
+      this.$router.push({ path: this.selectedRoute });
+    },
   },
   created() {},
-  methods: {},
-  mounted() {},
 };
 </script>
 
@@ -127,6 +139,33 @@ nav li a:hover {
     font-size: 1.3rem;
     padding: 0.4rem;
     text-shadow: none;
+  }
+}
+@media (min-width: 600px) {
+  .sm-nav {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .nav-links {
+    display: none;
+  }
+  .sm-nav {
+    flex: 1;
+  }
+
+  .sm-nav select {
+    float: right;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--grass-green);
+    background-color: var(--dark-blue-tile);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--white);
+    margin-right: 1rem;
+  }
+  nav {
+    padding: 1rem 0 1rem 1rem;
   }
 }
 </style>

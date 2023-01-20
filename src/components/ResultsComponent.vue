@@ -4,7 +4,7 @@
       <div v-if="loading" class="loader">
         <img src="../assets/loading-1.gif" alt="" />
       </div>
-      <table>
+      <table class="lg-table">
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -28,7 +28,14 @@
               loss: match.score.winner === 'AWAY_TEAM',
             }"
           >
-            {{ match.homeTeam.name.replace(" FC", "") }}
+            <div class="team-row">
+              <img
+                :src="crestUrl + match.homeTeam.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+              {{ match.homeTeam.name.replace(" FC", "") }}
+            </div>
           </td>
           <td v-bind:class="{ draw: match.score.winner === 'DRAW' }">
             {{ match.score.fullTime.homeTeam }}
@@ -41,7 +48,77 @@
               loss: match.score.winner === 'HOME_TEAM',
             }"
           >
-            {{ match.awayTeam.name.replace(" FC", "") }}
+            <div class="team-row">
+              <img
+                :src="crestUrl + match.awayTeam.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+              {{ match.awayTeam.name.replace(" FC", "") }}
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class="sm-table">
+        <tr v-for="match in paginatedMatches" :key="match.id" class="matches">
+          <td class="date-container">
+            <tr class="row date">
+              {{
+                new Date(match.utcDate).toLocaleDateString()
+              }}
+            </tr>
+            <tr class="row time">
+              {{
+                new Date(match.utcDate).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              }}
+            </tr>
+          </td>
+          <td>
+            <tr
+              class="row home"
+              v-bind:class="{
+                win: match.score.winner === 'HOME_TEAM',
+                loss: match.score.winner === 'AWAY_TEAM',
+              }"
+            >
+              <div class="team">
+                <div class="team-row">
+                  <img
+                    :src="crestUrl + match.homeTeam.id + crestUrlExt"
+                    @error="onError"
+                    alt=""
+                  />
+                  {{ match.homeTeam.name.replace(" FC", "") }}
+                </div>
+                <div class="goals">
+                  {{ match.score.fullTime.homeTeam }}
+                </div>
+              </div>
+            </tr>
+            <tr
+              class="row away"
+              v-bind:class="{
+                win: match.score.winner === 'AWAY_TEAM',
+                loss: match.score.winner === 'HOME_TEAM',
+              }"
+            >
+              <div class="team">
+                <div class="team-row">
+                  <img
+                    :src="crestUrl + match.awayTeam.id + crestUrlExt"
+                    @error="onError"
+                    alt=""
+                  />
+                  {{ match.awayTeam.name.replace(" FC", "") }}
+                </div>
+                <div class="goals">
+                  {{ match.score.fullTime.awayTeam }}
+                </div>
+              </div>
+            </tr>
           </td>
         </tr>
       </table>
@@ -111,11 +188,18 @@ export default {
       currentPage: 1,
       pageOne: 1,
       loading: true,
+      crestUrl: "https://crests.football-data.org/",
+      crestUrlExt: ".png",
+      altCrestUrlExt: ".svg",
     };
   },
   created() {},
 
-  methods: {},
+  methods: {
+    onError() {
+      this.crestUrlExt = this.altCrestUrlExt;
+    },
+  },
   mounted() {
     axios
       .get("https://api.football-data.org/v2/competitions/2021/matches", {
@@ -156,20 +240,20 @@ export default {
 </script>
 
 <style lang='css' scoped>
-.win {
+.lg-table .win {
   border-bottom: 1px solid var(--grass-green);
 }
 
-.loss {
+.lg-table .loss {
   border-bottom: 1px solid var(--red);
 }
 
-.draw {
+.lg-table .draw {
   border-bottom: 1px solid var(--yellow);
 }
 
-td:first-child,
-tr:first-child {
+.lg-table td:first-child,
+.lg-table tr:first-child {
   width: fit-content;
 }
 
@@ -182,17 +266,96 @@ table {
 
 table th {
   background-color: var(--dark-blue-tile);
+  z-index: 2;
   padding: 1rem;
+  position: relative;
   text-align: left;
   border-radius: 5px;
   font-family: var(--font-family-roboto);
   border-bottom: 2px groove var(--faded-gray);
 }
 
-table tr td {
+.lg-table tr td {
+  position: relative;
   padding: 1rem;
   font-family: var(--font-family-base);
   vertical-align: middle;
+  z-index: 2;
   border-bottom: 1px groove var(--dark-blue-tile);
+}
+table tr td:nth-child(3),
+table tr td:nth-child(5) {
+  width: 150px;
+}
+
+@media (min-width: 700px) {
+  .sm-table {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .lg-table {
+    display: none;
+  }
+  .sm-table {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    font-family: var(--font-family-roboto);
+  }
+  .row {
+    padding: 0.5rem !important;
+    display: flex;
+  }
+  .date-container {
+    width: fit-content;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .date-container .date,
+  .date-container .time {
+    justify-content: center;
+    padding: 0.2rem !important;
+  }
+
+  .sm-table .matches .away,
+  .sm-table .matches .home {
+    font-size: 1rem;
+  }
+  .sm-table .matches {
+    display: flex;
+    border-bottom: 1px solid var(--main-bg-color);
+  }
+  .sm-table .team {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 250px;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 480px) {
+  table {
+    padding: 0 !important;
+  }
+  .sm-table .matches .away,
+  .sm-table .matches .home {
+    font-size: 0.9rem;
+  }
+  .date-container {
+    padding-right: 0 !important;
+  }
+  .sm-table tr td:not(.date-container) {
+    padding: 0.7rem 1rem 0 0.7rem !important;
+    width: 100%;
+  }
+  .sm-table .team-row {
+    width: 150px;
+    margin-right: 1rem;
+  }
+  .sm-table .team {
+    width: auto !important;
+  }
 }
 </style>

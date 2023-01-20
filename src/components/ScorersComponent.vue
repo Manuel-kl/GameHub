@@ -12,7 +12,16 @@
         </tr>
         <tr v-for="scorer in paginatedScorers" :key="scorer.id">
           <td>{{ scorer.player.name }}</td>
-          <td>{{ scorer.team.name }}</td>
+          <td>
+            <div class="team-row">
+              <img
+                :src="crestUrl + scorer.team.id + crestUrlExt"
+                @error="onError"
+                alt=""
+              />
+              {{ scorer.team.name.replace(" FC", " ") }}
+            </div>
+          </td>
           <td>{{ scorer.numberOfGoals }}</td>
         </tr>
       </table>
@@ -78,6 +87,9 @@ export default {
       currentPage: 1,
       pageOne: 1,
       loading: true,
+      crestUrl: "https://crests.football-data.org/",
+      crestUrlExt: ".png",
+      altCrestUrlExt: ".svg",
     };
   },
   created() {
@@ -98,7 +110,11 @@ export default {
         console.log(error);
       });
   },
-  methods: {},
+  methods: {
+    onError() {
+      this.crestUrlExt = this.altCrestUrlExt;
+    },
+  },
   mounted() {},
   computed: {
     paginatedScorers() {
@@ -130,6 +146,7 @@ table th {
   font-family: var(--font-family-roboto);
   border-bottom: 2px groove var(--grass-green);
   text-align: center;
+  z-index: 2;
 }
 
 td:first-child,
@@ -141,6 +158,13 @@ table tr td {
   font-family: var(--font-family-base);
   text-align: center;
   vertical-align: middle;
+  z-index: 2;
   border: 1px groove var(--faded-gray);
+}
+@media (max-width: 400px) {
+  table tr td {
+    padding: 0.7rem !important;
+    width: auto !important;
+  }
 }
 </style>
