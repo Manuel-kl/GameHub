@@ -1,8 +1,23 @@
 <template>
-  <nav></nav>
-  <router-view />
-</template>
+  <div></div>
 
+  <keep-alive include="['RandomImage']">
+    <router-view />
+  </keep-alive>
+</template>
+<script>
+import RandomImage from "./components/RandomImage.vue";
+export default {
+  components: { RandomImage },
+  props: {},
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
+  mounted() {},
+};
+</script>
 <style lang="css">
 * {
   margin: 0;
@@ -180,6 +195,69 @@ table {
 }
 @media (max-width: 700px) {
 }
+
+@media (min-width: 600px) {
+  .sm-nav {
+    display: none;
+  }
+}
 @media (max-width: 600px) {
+  .sm-nav {
+    flex: 1;
+  }
+
+  .sm-nav select {
+    float: right;
+    padding: 0.5rem 1.8rem 0.5rem 1.5rem;
+    border: none;
+    background-color: var(--dark-blue-tile);
+    border-radius: 7px;
+    font-size: 1.1rem;
+    letter-spacing: 0.4px;
+    color: var(--white);
+    margin-right: 1rem;
+    appearance: none;
+    border: 1px solid var(--dark-blue-tile);
+    cursor: pointer;
+    border-bottom: 1px groove var(--grass-green);
+    transition: all 0.4s ease-in-out;
+    border-right: 1px groove var(--grass-green);
+  }
+  #caret-down {
+    position: absolute;
+    right: 25px;
+    padding: 0;
+    top: 33px;
+    transform: translateY(-50%);
+    color: var(--white);
+  }
+  select:focus,
+  select:hover,
+  select:focus-visible {
+    background-color: var(--tile-bg-color-active);
+    border: 1px groove var(--main-green);
+    border-left: none;
+    border-top: none;
+    transition: all 0.4s ease-in-out;
+    color: var(--grass-green);
+  }
+  select option {
+    color: var(--white);
+  }
+  select:focus + #caret-down {
+    color: var(--grass-green);
+  }
+  .sm-nav select:focus-visible {
+    outline: none;
+    border: none;
+    border-bottom: 1px groove var(--grass-green);
+  }
+
+  section.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--tile-bg-color);
+  }
 }
 </style>

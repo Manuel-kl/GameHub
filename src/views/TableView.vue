@@ -2,14 +2,27 @@
   <div class="app">
     <section class="navbar">
       <nav-bar />
+      <div class="sm-nav">
+        <select v-model="selectedRoute" @change="changeRoute">
+          <option value="/table">Table</option>
+          <option value="/matches">Matches</option>
+          <option value="/results" :selected="results">Results</option>
+          <option value="/scorers">Scorers</option>
+        </select>
+        <font-awesome-icon icon="fa-solid fa-chevron-down" id="caret-down" />
+      </div>
     </section>
     <section>
       <side-bar />
       <main>
         <div class="container">
-          <random-image class="random-left" />
+          <keep-alive include="">
+            <random-image class="random-left" />
+          </keep-alive>
           <table-component class="table" />
-          <random-image />
+          <keep-alive>
+            <random-image />
+          </keep-alive>
         </div>
       </main>
     </section>
@@ -28,10 +41,16 @@ export default {
   components: { NavBar, SideBar, TableComponent, RandomImage, FooterComponent },
   props: {},
   data() {
-    return {};
+    return {
+      selectedRoute: "/table",
+    };
   },
   created() {},
-  methods: {},
+  methods: {
+    changeRoute() {
+      this.$router.push({ path: this.selectedRoute });
+    },
+  },
   mounted() {},
 };
 </script>
