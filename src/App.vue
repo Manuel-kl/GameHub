@@ -1,9 +1,8 @@
 <template>
   <div></div>
 
-  <keep-alive include="['RandomImage']">
-    <router-view />
-  </keep-alive>
+  <router-view />
+  <keep-alive include="['RandomImage']"> </keep-alive>
 </template>
 <script>
 import RandomImage from "./components/RandomImage.vue";
