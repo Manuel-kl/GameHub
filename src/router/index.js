@@ -64,6 +64,17 @@ const router = createRouter({
         }
     },
 
+
+})
+router.beforeResolve((to, from, next) => {
+    // If this isn't an initial page load.
+    if (to.name) {
+        // Start the route progress bar.
+    }
+    // Track a pageview in Matomo
+    window._paq.push(['setCustomUrl', to.fullPath]);
+    window._paq.push(['trackPageView']);
+    next()
 })
 
 export default router
