@@ -5,10 +5,40 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title>
-        <%= htmlWebpackPlugin.options.title %>
-    </title>
+    <link rel="icon" href="<%= BASE_URL %>gamehub.png" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZY7SWZTV3T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-ZY7SWZTV3T");
+    </script>
+    <!-- Matomo -->
+    <script>
+        var _paq = (window._paq = window._paq || []);
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(["trackPageView"]);
+        _paq.push(["enableLinkTracking"]);
+        (function() {
+            var u = "https://manuelgamehubnetlifyapp.matomo.cloud/";
+            _paq.push(["setTrackerUrl", u + "matomo.php"]);
+            _paq.push(["setSiteId", "1"]);
+            var d = document,
+                g = d.createElement("script"),
+                s = d.getElementsByTagName("script")[0];
+            g.async = true;
+            g.src =
+                "//cdn.matomo.cloud/manuelgamehubnetlifyapp.matomo.cloud/matomo.js";
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+    <title>GameHub</title>
 </head>
 
 <body>

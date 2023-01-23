@@ -4,10 +4,10 @@
       <nav-bar />
       <div class="sm-nav">
         <select v-model="selectedRoute" @change="changeRoute">
-          <option value="/table">Table</option>
-          <option value="/matches">Matches</option>
-          <option value="/results" :selected="results">Results</option>
-          <option value="/scorers">Scorers</option>
+          <option value="/table" id="my-button">Table</option>
+          <option value="/matches" id="my-button">Matches</option>
+          <option value="/results" id="my-button">Results</option>
+          <option value="/scorers" id="my-button">Scorers</option>
         </select>
         <font-awesome-icon icon="fa-solid fa-chevron-down" id="caret-down" />
       </div>
@@ -51,7 +51,18 @@ export default {
       this.$router.push({ path: this.selectedRoute });
     },
   },
-  mounted() {},
+  mounted() {
+    // Add an event listener to track scrolling
+    window.addEventListener("scroll", function () {
+      // Track a scroll event in Matomo
+      window._paq.push(["trackEvent", "Window", "Scroll"]);
+    });
+    // Add an event listener to track clicks on the button
+    document.getElementById("my-button").addEventListener("click", function () {
+      // Track a click event in Matomo
+      window._paq.push(["trackEvent", "Button", "Click"]);
+    });
+  },
 };
 </script>
 <style scoped>

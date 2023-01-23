@@ -209,14 +209,14 @@ table {
     float: right;
     padding: 0.5rem 1.8rem 0.5rem 1.5rem;
     border: none;
-    background-color: var(--dark-blue-tile);
+    background-color: var(--tile-bg-color-active);
     border-radius: 7px;
     font-size: 1.1rem;
     letter-spacing: 0.4px;
     color: var(--white);
     margin-right: 1rem;
     appearance: none;
-    border: 1px solid var(--dark-blue-tile);
+    border: 1px solid var(--tile-bg-color-active);
     cursor: pointer;
     border-bottom: 1px groove var(--grass-green);
     transition: all 0.4s ease-in-out;

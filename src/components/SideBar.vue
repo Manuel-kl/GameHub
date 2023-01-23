@@ -9,11 +9,13 @@
         v-if="!sidebarOpen"
         icon="fa-solid fa-bars"
         class="side-bar-open"
+        id="my-button"
       />
       <font-awesome-icon
         v-if="sidebarOpen"
         v-bind:class="{ rotate }"
         icon="fa-solid fa-x"
+        id="my-button"
       />
     </div>
     <aside v-bind:class="{ open: sidebarOpen }">
@@ -21,22 +23,22 @@
         <h2>Competitions</h2>
       </div>
       <div class="leagues">
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>Premier League</h4>
         </div>
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>Bundesliga</h4>
         </div>
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>Serie A</h4>
         </div>
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>Ligue 1</h4>
         </div>
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>English League Championship</h4>
         </div>
-        <div class="league">
+        <div class="league" id="my-button">
           <h4>UEFA Champions League</h4>
         </div>
       </div>
@@ -44,8 +46,10 @@
   </div>
 </template>
 <script>
+import { toggleSidebarMixin } from "./mixins/toggleSidebarMixin";
 export default {
   components: {},
+  mixins: [toggleSidebarMixin],
   props: {},
   data() {
     return {
@@ -55,9 +59,6 @@ export default {
   },
   created() {},
   methods: {
-    toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
-    },
     rotateIcon() {
       setTimeout(() => {
         this.rotate = true;
@@ -66,6 +67,16 @@ export default {
   },
   mounted() {
     this.rotateIcon();
+    // Add an event listener to track scrolling
+    window.addEventListener("scroll", function () {
+      // Track a scroll event in Matomo
+      window._paq.push(["trackEvent", "Window", "Scroll"]);
+    });
+    // Add an event listener to track clicks on the button
+    document.getElementById("my-button").addEventListener("click", function () {
+      // Track a click event in Matomo
+      window._paq.push(["trackEvent", "Button", "Click"]);
+    });
   },
 };
 </script>

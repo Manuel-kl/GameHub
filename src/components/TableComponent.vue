@@ -55,12 +55,14 @@
           class="sm-d-none"
           v-if="currentPage > 2"
           v-on:click="currentPage = currentPage - 2"
+          id="my-button"
         >
           {{ currentPage - 2 }}
         </button>
         <button
           v-if="currentPage > 1"
           v-on:click="currentPage = currentPage - 1"
+          id="my-button"
         >
           {{ currentPage - 1 }}
         </button>
@@ -70,6 +72,7 @@
         <button
           v-if="currentPage < totalPages"
           v-on:click="currentPage = currentPage + 1"
+          id="my-button"
         >
           {{ currentPage + 1 }}
         </button>
@@ -77,6 +80,7 @@
           class="sm-d-none"
           v-if="currentPage < totalPages - 1"
           v-on:click="currentPage = currentPage + 2"
+          id="my-button"
         >
           {{ currentPage + 2 }}
         </button>
@@ -86,6 +90,7 @@
           class="last-page"
           v-if="currentPage < totalPages"
           v-on:click="currentPage = totalPages"
+          id="my-button"
         >
           {{ totalPages }}
         </button>
@@ -131,7 +136,18 @@ export default {
       this.crestUrlExt = this.altCrestUrlExt;
     },
   },
-  mounted() {},
+  mounted() {
+    // Add an event listener to track scrolling
+    window.addEventListener("scroll", function () {
+      // Track a scroll event in Matomo
+      window._paq.push(["trackEvent", "Window", "Scroll"]);
+    });
+    // Add an event listener to track clicks on the button
+    document.getElementById("my-button").addEventListener("click", function () {
+      // Track a click event in Matomo
+      window._paq.push(["trackEvent", "Button", "Click"]);
+    });
+  },
   computed: {
     paginatedStandings() {
       const start = (this.currentPage - 1) * 10;
