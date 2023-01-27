@@ -68,7 +68,20 @@ main {
   transition: all 0.3s ease-out;
   padding: 1rem 0;
 }
-
+.updates {
+  color: var(--white);
+  font-size: 1.2rem;
+  font-family: var(--font-family-roboto);
+}
+.updates h4 {
+  text-align: center;
+  color: var(--grass-green);
+}
+@keyframes blink {
+  50% {
+    opacity: 0.1;
+  }
+}
 .table-rank {
   display: flex;
   padding: 1rem 0 0 3rem;
@@ -144,6 +157,10 @@ table {
 .loader {
   display: flex;
   padding: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  animation: blink 5s infinite;
+  align-items: center;
 }
 .loader img {
   width: 100px;
