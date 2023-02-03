@@ -123,9 +123,7 @@ export default {
   created() {
     axios
       .get("https://api.football-data.org/v2/competitions/2021/standings", {
-        headers: {
-          "X-Auth-Token": process.env.VUE_APP_API_KEY,
-        },
+        headers: { "X-Auth-Token": process.env.VUE_APP_API_KEY },
       })
       .then((response) => {
         setTimeout(() => {

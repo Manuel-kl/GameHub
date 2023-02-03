@@ -1,38 +1,38 @@
 {
-  "name": "game-hub",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-brands-svg-icons": "^6.2.1",
-    "@fortawesome/free-regular-svg-icons": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
-    "@fortawesome/vue-fontawesome": "^3.0.2",
-    "@vuepic/vue-datepicker": "^3.6.4",
-    "axios": "^1.2.2",
-    "core-js": "^3.8.3",
-    "jw-paginate": "^1.0.4",
-    "jw-vue-pagination": "^1.0.3",
-    "vue-axios": "^3.5.2",
-    "vue-date-fns": "^2.0.2",
-    "vue-router": "^4.0.3",
-    "vuejs-paginate-next": "^1.0.2",
-    "vuex": "^4.0.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-unit-jest": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "@vue/test-utils": "^2.0.0-0",
-    "@vue/vue3-jest": "^27.0.0-alpha.1",
-    "babel-jest": "^27.0.6",
-    "jest": "^27.0.5"
-  }
+    "name": "game-hub",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "test:unit": "vue-cli-service test:unit"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.2.1",
+        "@fortawesome/free-brands-svg-icons": "^6.2.1",
+        "@fortawesome/free-regular-svg-icons": "^6.2.1",
+        "@fortawesome/free-solid-svg-icons": "^6.2.1",
+        "@fortawesome/vue-fontawesome": "^3.0.2",
+        "@vuepic/vue-datepicker": "^3.6.4",
+        "axios": "^1.2.2",
+        "core-js": "^3.8.3",
+        "jw-paginate": "^1.0.4",
+        "jw-vue-pagination": "^1.0.3",
+        "vue-axios": "^3.5.2",
+        "vue-date-fns": "^2.0.2",
+        "vue-router": "^4.0.3",
+        "vuejs-paginate-next": "^1.0.2",
+        "vuex": "^4.0.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~5.0.0",
+        "@vue/cli-plugin-router": "~5.0.0",
+        "@vue/cli-plugin-unit-jest": "~5.0.0",
+        "@vue/cli-plugin-vuex": "~5.0.0",
+        "@vue/cli-service": "~5.0.0",
+        "@vue/test-utils": "^2.0.0-0",
+        "@vue/vue3-jest": "^27.0.0-alpha.1",
+        "babel-jest": "^27.0.6",
+        "jest": "^27.0.5"
+    }
 }
