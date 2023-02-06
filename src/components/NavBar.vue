@@ -11,7 +11,9 @@
           <router-link to="/table" active-class="active">Table</router-link>
         </li>
         <li>
-          <router-link to="/matches" active-class="active">Matches</router-link>
+          <router-link to="/matches" active-class="active"
+            >Fixtures</router-link
+          >
         </li>
         <li>
           <router-link to="/results" active-class="active">Results</router-link>

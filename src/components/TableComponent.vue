@@ -2,7 +2,7 @@
   <div>
     <div>
       <div v-if="loading" class="loader">
-        <img src="../assets/loading.gif" alt="" />
+        <img src="../assets/loading-1.gif" alt="" />
         <div class="updates">
           <h2>Updating the website</h2>
           <br />
@@ -105,7 +105,8 @@
   </div>
 </template>
   <script>
-import axios from "axios";
+import axios from "../utils/api.js";
+
 export default {
   components: {},
   props: {},
@@ -122,12 +123,11 @@ export default {
   },
   created() {
     axios
-      .get("https://api.football-data.org/v2/competitions/2021/standings", {
-        headers: { "X-Auth-Token": process.env.VUE_APP_API_KEY },
-      })
+      .get("/table")
       .then((response) => {
         setTimeout(() => {
-          this.standings = response.data.standings[0].table;
+          console.log(response.data.table);
+          this.standings = response.data.table.standings[0].table;
           this.loading = false;
         }, 500);
       })

@@ -2,7 +2,7 @@
   <div>
     <div>
       <div v-if="loading" class="loader">
-        <img src="../assets/loading.gif" alt="" />
+        <img src="../assets/loading-1.gif" alt="" />
         <div class="updates">
           <h2>Updating the website</h2>
           <br />
@@ -148,7 +148,7 @@
 <script>
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import axios from "axios";
+import axios from "../utils/api.js";
 export default {
   watch: {},
 
@@ -174,14 +174,10 @@ export default {
   },
   mounted() {
     axios
-      .get("https://api.football-data.org/v2/competitions/2021/matches", {
-        headers: {
-          "X-Auth-Token": process.env.VUE_APP_API_KEY,
-        },
-      })
+      .get("/games")
       .then((response) => {
         setTimeout(() => {
-          this.matches = response.data.matches;
+          this.matches = response.data.games.matches;
           this.loading = false;
         }, 300);
       })

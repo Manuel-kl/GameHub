@@ -2,7 +2,7 @@
   <div>
     <div>
       <div v-if="loading" class="loader">
-        <img src="../assets/loading.gif" alt="" />
+        <img src="../assets/loading-1.gif" alt="" />
         <div class="updates">
           <h2>Updating the website</h2>
           <br />
@@ -28,7 +28,7 @@
               {{ scorer.team.name.replace(" FC", " ") }}
             </div>
           </td>
-          <td>{{ scorer.numberOfGoals }}</td>
+          <td>{{ scorer.goals }}</td>
         </tr>
       </table>
     </div>
@@ -83,7 +83,7 @@
   </div>
 </template>
   <script>
-import axios from "axios";
+import axios from "../utils/api.js";
 export default {
   components: {},
   props: {},
@@ -100,15 +100,11 @@ export default {
   },
   created() {
     axios
-      .get(
-        "https://api.football-data.org/v2/competitions/2021/scorers?limit=1000",
-        {
-          headers: { "X-Auth-Token": process.env.VUE_APP_API_KEY },
-        }
-      )
+      .get("/scorers")
       .then((response) => {
         setTimeout(() => {
-          this.topScorers = response.data.scorers;
+          console.log(response.data.scorers.scorers);
+          this.topScorers = response.data.scorers.scorers;
           this.loading = false;
         }, 600);
       })
