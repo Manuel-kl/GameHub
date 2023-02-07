@@ -97,7 +97,6 @@ export default {
       .get("/scorers")
       .then((response) => {
         setTimeout(() => {
-          console.log(response.data.scorers.scorers);
           this.topScorers = response.data.scorers.scorers;
           this.loading = false;
         }, 600);

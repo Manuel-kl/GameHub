@@ -120,7 +120,6 @@ export default {
       .get("/table")
       .then((response) => {
         setTimeout(() => {
-          console.log(response.data.table);
           this.standings = response.data.table.standings[0].table;
           this.loading = false;
         }, 500);
