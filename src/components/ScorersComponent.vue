@@ -3,12 +3,6 @@
     <div>
       <div v-if="loading" class="loader">
         <img src="../assets/loading-1.gif" alt="" />
-        <div class="updates">
-          <h2>Updating the website</h2>
-          <br />
-          <br />
-          <h4>Stay tuned ...</h4>
-        </div>
       </div>
       <table>
         <tr>
@@ -138,6 +132,7 @@ table {
   border-radius: 5px;
   border-collapse: collapse;
   color: var(--white);
+  margin: auto;
 }
 
 table th {

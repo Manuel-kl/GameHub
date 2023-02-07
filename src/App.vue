@@ -1,8 +1,9 @@
 <template>
   <div></div>
 
-  <router-view />
-  <keep-alive include="['RandomImage']"> </keep-alive>
+  <transition name="slide-fade">
+    <router-view />
+  </transition>
 </template>
 <script>
 import RandomImage from "./components/RandomImage.vue";
@@ -49,6 +50,25 @@ a {
   --font-family-base: "PT Sans", sans-serif;
   --font-family-roboto: "Roboto Condensed", sans-serif;
 }
+
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.6s ease-in-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s ease-in-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 1;
+  transform: translateY(3px);
+}
+
 .app {
   display: flex;
   flex-direction: column;
