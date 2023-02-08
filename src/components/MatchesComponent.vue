@@ -181,7 +181,7 @@ export default {
   },
   computed: {
     scheduledMatches() {
-      return this.matches.filter((match) => match.status === "SCHEDULED");
+      return this.matches.filter((match) => match.status === "TIMED");
     },
     paginatedMatches() {
       const start = (this.currentPage - 1) * 10;
