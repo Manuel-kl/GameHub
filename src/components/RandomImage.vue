@@ -76,8 +76,14 @@ export default {
   max-height: 50vh;
 }
 @keyframes blink {
+  20% {
+    opacity: 0.4;
+  }
   50% {
-    opacity: 0.6;
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.7;
   }
 }
 @media (max-width: 1020px) {
