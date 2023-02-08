@@ -1,14 +1,13 @@
 <template>
-  <div></div>
-
   <transition name="slide-fade">
     <router-view />
   </transition>
 </template>
 <script>
+import NavBar from "./components/NavBar.vue";
 import RandomImage from "./components/RandomImage.vue";
 export default {
-  components: { RandomImage },
+  components: { RandomImage, NavBar },
   props: {},
   data() {
     return {};
