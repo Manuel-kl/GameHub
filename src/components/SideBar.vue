@@ -36,7 +36,7 @@
           <router-link to="/"> <h4>Ligue 1</h4></router-link>
         </div>
         <div class="league" id="my-button">
-          <router-link to="/C">
+          <router-link to="/">
             <h4>English League Championship</h4>
           </router-link>
         </div>
