@@ -103,6 +103,7 @@ table {
 .team-row {
   display: flex;
   flex-direction: row;
+  text-align: start;
 }
 
 .team-row img {

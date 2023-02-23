@@ -4,6 +4,7 @@
       <div v-if="loading" class="loader">
         <img src="../assets/loading-1.gif" alt="" />
       </div>
+
       <table class="lg-table">
         <tr>
           <th>Date</th>
@@ -15,6 +16,7 @@
           <td class="datetime">
             {{ new Date(match.utcDate).toLocaleDateString() }}
           </td>
+
           <td class="datetime">
             {{
               new Date(match.utcDate).toLocaleTimeString([], {
@@ -23,6 +25,7 @@
               })
             }}
           </td>
+
           <td>
             <div class="team-row">
               <img
@@ -168,10 +171,12 @@ export default {
   },
   mounted() {
     axios
-      .get("/games")
+      .get("/games/PL")
       .then((response) => {
         setTimeout(() => {
           this.matches = response.data.games.matches;
+          console.log(this.matches);
+
           this.loading = false;
         }, 300);
       })
@@ -207,7 +212,9 @@ table {
   border-collapse: collapse;
   color: var(--white);
 }
-
+.matchday {
+  max-width: 12px;
+}
 .lg-table th {
   background-color: var(--dark-blue-tile);
   padding: 1rem;

@@ -203,7 +203,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/games", {})
+      .get("/games/PL", {})
       .then((response) => {
         setTimeout(() => {
           this.matches = response.data.games.matches;

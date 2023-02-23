@@ -117,7 +117,7 @@ export default {
   },
   created() {
     axios
-      .get("/table")
+      .get("/table/PL")
       .then((response) => {
         setTimeout(() => {
           this.standings = response.data.table.standings[0].table;

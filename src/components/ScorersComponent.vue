@@ -8,7 +8,9 @@
         <tr>
           <th>Name</th>
           <th>Team</th>
-          <th>Goals</th>
+          <th>GLS</th>
+          <th>PEN</th>
+          <th>AST</th>
         </tr>
         <tr v-for="scorer in paginatedScorers" :key="scorer.id">
           <td>{{ scorer.player.name }}</td>
@@ -19,10 +21,12 @@
                 @error="onError"
                 alt=""
               />
-              {{ scorer.team.name.replace(" FC", " ") }}
+              {{ scorer.team.shortName.replace(" FC", " ") }}
             </div>
           </td>
           <td>{{ scorer.goals }}</td>
+          <td>{{ scorer.penalties }}</td>
+          <td>{{ scorer.assists }}</td>
         </tr>
       </table>
     </div>
@@ -94,7 +98,7 @@ export default {
   },
   created() {
     axios
-      .get("/scorers")
+      .get("/scorers/PL")
       .then((response) => {
         setTimeout(() => {
           this.topScorers = response.data.scorers.scorers;
@@ -114,7 +118,6 @@ export default {
   computed: {
     paginatedScorers() {
       const start = (this.currentPage - 1) * 10;
-
       return this.topScorers.slice(start, start + 10);
     },
     totalPages() {
@@ -158,9 +161,18 @@ table tr td {
   border: 1px groove var(--faded-gray);
 }
 @media (max-width: 400px) {
-  table tr td {
-    padding: 0.7rem !important;
+  table tr td,
+  table tr th {
+    padding: 0.5rem 0.2rem !important;
     width: auto !important;
+    font-size: 0.9rem !important;
+  }
+  table tr :nth-child(3) {
+    padding: 0.4rem !important;
+  }
+  img {
+    padding-right: 0.1 !important;
+    margin-right: 0 !important;
   }
 }
 </style>
