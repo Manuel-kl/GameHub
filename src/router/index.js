@@ -9,7 +9,7 @@ const routes = [{
     },
 
     {
-        path: '/table',
+        path: '/table/:tableName',
         name: 'table',
         props: true,
         component: () =>

@@ -116,8 +116,9 @@ export default {
     };
   },
   created() {
+    const tableName = this.$route.params.tableName;
     axios
-      .get("/table/PL")
+      .get(`/table/${tableName}`)
       .then((response) => {
         setTimeout(() => {
           this.standings = response.data.table.standings[0].table;

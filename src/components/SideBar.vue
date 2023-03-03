@@ -24,19 +24,19 @@
       </div>
       <div class="leagues">
         <div class="league" id="my-button">
-          <router-link to="/"> <h4>Premier League</h4></router-link>
+          <router-link to="/table/PL"> <h4>Premier League</h4></router-link>
         </div>
         <div class="league" id="my-button">
-          <router-link to="/"> <h4>Bundesliga</h4></router-link>
+          <router-link to="/BL1"> <h4>Bundesliga</h4></router-link>
         </div>
         <div class="league" id="my-button">
-          <router-link to="/"> <h4>Serie A</h4></router-link>
+          <router-link to="/table/SA"> <h4>Serie A</h4></router-link>
         </div>
         <div class="league" id="my-button">
-          <router-link to="/"> <h4>Ligue 1</h4></router-link>
+          <router-link to="/table/FL1"> <h4>Ligue 1</h4></router-link>
         </div>
         <div class="league" id="my-button">
-          <router-link to="/">
+          <router-link to="/table/ELC">
             <h4>English League Championship</h4>
           </router-link>
         </div>
